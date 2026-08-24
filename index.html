@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#050507"
+    >
+
+    <meta
+        name="color-scheme"
+        content="dark"
+    >
+
+    <meta
+        name="description"
+        content="إلى غدير — تجربة حب رقمية تحكي قصة بدأت في 2022 وما زالت تكتب فصولها."
+    >
+
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
+    <title>❤️ إلى غدير | Our Love Story</title>
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="icons/favicon.svg"
+    >
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         STYLES
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/responsive.css"
+    >
+</head>
+
+
+<body>
+<!نجووممم-->
+<div class="stars-background" aria-hidden="true"></div>
+    <!-- =====================================================
+         ACCESSIBILITY
+    ====================================================== -->
+
+    <a
+        href="#main-content"
+        class="skip-link"
+    >
+        الانتقال إلى المحتوى
+    </a>
+
+
+    <!-- =====================================================
+         GLOBAL ATMOSPHERE
+    ====================================================== -->
+
+    <div
+        id="ambient-background"
+        class="ambient-background"
+        aria-hidden="true"
+    >
+
+        <div class="ambient-gradient ambient-gradient--one"></div>
+
+        <div class="ambient-gradient ambient-gradient--two"></div>
+
+        <div class="ambient-gradient ambient-gradient--three"></div>
+
+        <div class="ambient-noise"></div>
+
+        <canvas
+            id="ambient-canvas"
+            class="ambient-canvas"
+            aria-hidden="true"
+        ></canvas>
+
+    </div>
+
+
+    <!-- =====================================================
+         OPENING EXPERIENCE
+    ====================================================== -->
+
+    <section
+        id="opening"
+        class="opening"
+        aria-label="بداية التجربة"
+    >
+
+        <div
+            class="opening__atmosphere"
+            aria-hidden="true"
+        >
+
+            <span class="opening__star opening__star--one"></span>
+            <span class="opening__star opening__star--two"></span>
+            <span class="opening__star opening__star--three"></span>
+
+            <span class="opening__glow"></span>
+
+        </div>
+
+
+        <div class="opening__content">
+
+            <span
+                class="opening__eyebrow"
+                data-opening="eyebrow"
+            >
+                بعض القصص...
+            </span>
+
+
+            <div
+                class="opening__symbol"
+                aria-hidden="true"
+                data-opening="symbol"
+            >
+                <span class="opening__symbol-core">♡</span>
+            </div>
+
+
+            <p
+                class="opening__line"
+                data-opening="line"
+            >
+                لا تبدأ بكلمة...
+            </p>
+
+
+            <button
+                id="opening-enter"
+                class="opening__enter"
+                type="button"
+                data-action="enter-experience"
+            >
+
+                <span class="opening__enter-label">
+                    ادخل إلى قصتنا
+                </span>
+
+                <span
+                    class="opening__enter-icon"
+                    aria-hidden="true"
+                >
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="opening__progress"
+            aria-hidden="true"
+        >
+
+            <span class="opening__progress-line"></span>
+
+            <span class="opening__progress-text">
+                OUR STORY
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SECRET LOVE VAULT
+    ====================================================== -->
+
+    <section
+        id="password-screen"
+        class="vault"
+        aria-label="مساحة الذكريات الخاصة"
+        aria-hidden="true"
+    >
+
+        <div
+            class="vault__backdrop"
+            aria-hidden="true"
+        ></div>
+
+
+        <div class="vault__container">
+
+            <div
+                class="vault__seal"
+                aria-hidden="true"
+            >
+
+                <span class="vault__seal-ring"></span>
+
+                <span class="vault__seal-heart">
+                    ♡
+                </span>
+
+            </div>
+
+
+            <div class="vault__heading">
+
+                <span class="chapter-label">
+                    PRIVATE MEMORY SPACE
+                </span>
+
+                <h1>
+                    مكان لا يعرفه
+                    <span>إلا قلبان</span>
+                </h1>
+
+                <p>
+                    بعض الذكريات تستحق أن تبقى خلف باب خاص.
+                </p>
+
+            </div>
+
+
+            <form
+                id="password-form"
+                class="vault__form"
+                novalidate
+            >
+
+                <div class="vault__field">
+
+                    <label
+                        for="passwordInput"
+                        class="vault__label"
+                    >
+                        مفتاح الذكريات
+                    </label>
+
+
+                    <div class="vault__input-wrap">
+
+                        <span
+                            class="vault__input-icon"
+                            aria-hidden="true"
+                        >
+                            ♡
+                        </span>
+
+
+                        <input
+                            id="passwordInput"
+                            name="password"
+                            class="vault__input"
+                            type="password"
+                            inputmode="text"
+                            autocomplete="off"
+                            autocapitalize="none"
+                            spellcheck="false"
+                            placeholder="أدخل كلمة المرور"
+                            aria-describedby="password-error"
+                            aria-invalid="false"
+                        >
+
+
+                        <button
+                            id="password-visibility"
+                            class="vault__visibility"
+                            type="button"
+                            aria-label="إظهار كلمة المرور"
+                            aria-pressed="false"
+                        >
+                            <span
+                                class="icon-eye"
+                                aria-hidden="true"
+                            >
+                                ◉
+                            </span>
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        id="password-error"
+                        class="vault__error"
+                        role="alert"
+                        aria-live="assertive"
+                    ></p>
+
+                </div>
+
+
+                <button
+                    id="enterBtn"
+                    class="vault__submit"
+                    type="submit"
+                >
+
+                    <span>
+                        فتح الذكريات
+                    </span>
+
+                    <span
+                        class="vault__submit-icon"
+                        aria-hidden="true"
+                    >
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <p class="vault__hint">
+                لا توجد هنا إلا الأشياء التي تستحق أن نتذكرها.
+            </p>
+
+        </div>
+
+
+        <div
+            class="vault__status"
+            aria-live="polite"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WEBSITE
+    ====================================================== -->
+
+    <div
+        id="website"
+        class="site"
+        aria-hidden="true"
+    >
+
+        <!-- =================================================
+             CUSTOM CURSOR
+        ================================================== -->
+
+        <div
+            id="cursor"
+            class="cursor"
+            aria-hidden="true"
+        >
+
+            <span class="cursor__dot"></span>
+
+            <span class="cursor__ring"></span>
+
+            <span class="cursor__label"></span>
+
+        </div>
+
+
+        <!-- =================================================
+             TOP PROGRESS
+        ================================================== -->
+
+        <div
+            id="scroll-progress"
+            class="scroll-progress"
+            aria-hidden="true"
+        >
+
+            <span class="scroll-progress__bar"></span>
+
+        </div>
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
+
+        <header
+            id="site-header"
+            class="site-header"
+        >
+
+            <div class="site-header__inner">
+
+
+                <!-- Logo -->
+
+                <a
+                    href="#home"
+                    class="brand"
+                    aria-label="إلى غدير - الصفحة الرئيسية"
+                    data-nav-link
+                >
+
+                
+                    <span
+                        class="brand__symbol"
+                        aria-hidden="true"
+                    >
+                        ♡
+                    </span>
+
+                    <span class="brand__text">
+
+                        <strong>
+                            إلى غدير
+                        </strong>
+                        
+                        <small>
+                            OUR STORY
+                        </small>
+
+                    </span>
+
+                </a>
+
+
+                <!-- Desktop Navigation -->
+
+                <nav
+                    class="desktop-nav"
+                    aria-label="التنقل الرئيسي"
+                >
+
+                    <a
+                        href="#home"
+                        class="desktop-nav__link is-active"
+                        data-section="home"
+                        data-nav-link
+                    >
+                        <span>01</span>
+                        البداية
+                    </a>
+
+
+                    <a
+                        href="#story"
+                        class="desktop-nav__link"
+                        data-section="story"
+                        data-nav-link
+                    >
+                        <span>02</span>
+                        الحكاية
+                    </a>
+
+
+                    <a
+                        href="#memories"
+                        class="desktop-nav__link"
+                        data-section="memories"
+                        data-nav-link
+                    >
+                        <span>03</span>
+                        الذكريات
+                    </a>
+
+
+                    <a
+                        href="#time"
+                        class="desktop-nav__link"
+                        data-section="time"
+                        data-nav-link
+                    >
+                        <span>04</span>
+                        الوقت
+                    </a>
+
+
+                    <a
+                        href="#letter"
+                        class="desktop-nav__link"
+                        data-section="letter"
+                        data-nav-link
+                    >
+                        <span>05</span>
+                        الرسالة
+                    </a>
+
+
+                    <a
+                        href="#question"
+                        class="desktop-nav__link"
+                        data-section="question"
+                        data-nav-link
+                    >
+                        <span>06</span>
+                        السؤال
+                    </a>
+
+                </nav>
+
+
+                <!-- Music Button -->
+
+                <button
+                    id="music-toggle"
+                    class="header-music"
+                    type="button"
+                    aria-label="تشغيل الموسيقى"
+                    aria-pressed="false"
+                    data-action="music-toggle"
+                >
+
+                    <span
+                        class="header-music__bars"
+                        aria-hidden="true"
+                    >
+
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+
+                    </span>
+
+                    <span class="header-music__text">
+                        MUSIC
+                    </span>
+
+                </button>
+
+
+                <!-- Mobile Menu -->
+
+                <button
+                    id="mobile-menu-toggle"
+                    class="mobile-menu-toggle"
+                    type="button"
+                    aria-label="فتح القائمة"
+                    aria-expanded="false"
+                    aria-controls="mobile-navigation"
+                >
+
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             MOBILE NAVIGATION
+        ================================================== -->
+
+        <aside
+            id="mobile-navigation"
+            class="mobile-navigation"
+            aria-hidden="true"
+        >
+
+            <div class="mobile-navigation__backdrop"></div>
+
+
+            <div class="mobile-navigation__panel">
+
+                <div class="mobile-navigation__header">
+
+                    <span>
+                        OUR STORY
+                    </span>
+
+                    <button
+                        id="mobile-menu-close"
+                        type="button"
+                        aria-label="إغلاق القائمة"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <nav
+                    class="mobile-navigation__links"
+                    aria-label="التنقل على الهاتف"
+                >
+
+                    <a
+                        href="#home"
+                        data-section="home"
+                        data-nav-link
+                    >
+                        <small>01</small>
+                        <span>البداية</span>
+                    </a>
+
+
+                    <a
+                        href="#story"
+                        data-section="story"
+                        data-nav-link
+                    >
+                        <small>02</small>
+                        <span>الحكاية</span>
+                    </a>
+
+
+                    <a
+                        href="#memories"
+                        data-section="memories"
+                        data-nav-link
+                    >
+                        <small>03</small>
+                        <span>الذكريات</span>
+                    </a>
+
+
+                    <a
+                        href="#time"
+                        data-section="time"
+                        data-nav-link
+                    >
+                        <small>04</small>
+                        <span>الوقت</span>
+                    </a>
+
+
+                    <a
+                        href="#letter"
+                        data-section="letter"
+                        data-nav-link
+                    >
+                        <small>05</small>
+                        <span>الرسالة</span>
+                    </a>
+
+
+                    <a
+                        href="#question"
+                        data-section="question"
+                        data-nav-link
+                    >
+                        <small>06</small>
+                        <span>السؤال</span>
+                    </a>
+
+                </nav>
+
+
+                <div class="mobile-navigation__footer">
+
+                    <span>
+                        MADE WITH LOVE
+                    </span>
+
+                    <span aria-hidden="true">
+                        ♡
+                    </span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN
+        ================================================== -->
+
+        <main
+            id="main-content"
+            class="main"
+        >
+
+
+            <!-- =============================================
+                 CHAPTER 01 — HERO
+            ============================================== -->
+
+            <section
+                id="home"
+                class="chapter hero"
+                data-section="home"
+                aria-labelledby="hero-title"
+            >
+
+                <div
+                    class="hero__atmosphere"
+                    aria-hidden="true"
+                >
+
+                    <div class="hero__orb hero__orb--one"></div>
+
+                    <div class="hero__orb hero__orb--two"></div>
+
+                    <div class="hero__light"></div>
+
+                </div>
+
+
+                <div class="hero__content container">
+
+                    <div class="chapter-meta reveal">
+
+                    
+
+                        <span class="chapter-name">
+                            <h1>
+                            البداية
+                            </h1>
+                        </span>
+
+                    </div>
+
+
+                    <p
+                        class="hero__eyebrow reveal"
+                        data-delay="100"
+                    >
+                        إلى الشخص الذي غيّر معنى الأيام
+                    </p>
+
+
+                    <h1
+                        id="hero-title"
+                        class="hero__title reveal"
+                        data-delay="180"
+                    >
+
+                        <span class="hero__title-small">
+                            إلى حبيبتي
+                        </span>
+
+                        <span class="hero__title-main">
+                            غدير
+                        </span>
+
+                        <span
+                            class="hero__title-heart"
+                            aria-hidden="true"
+                        >
+                            ♡
+                        </span>
+
+                    </h1>
+
+
+                    <p
+                        class="hero__description reveal"
+                        data-delay="300"
+                    >
+                        كل لحظة معك أصبحت ذكرى،
+                        وكل يوم مرّ جعلني أكتشف
+                        سببًا جديدًا لأحبك أكثر.
+                    </p>
+
+
+                    <div
+                        class="hero__actions reveal"
+                        data-delay="420"
+                    >
+
+                        <a
+                            href="#story"
+                            class="button button--primary"
+                            data-action="start-story"
+                        >
+
+                            <span>
+                                ابدأ قصتنا
+                            </span>
+
+                            <span
+                                aria-hidden="true"
+                                class="button__arrow"
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="#memories"
+                            class="button button--ghost"
+                            data-action="view-memories"
+                        >
+
+                            <span>
+                                شاهد الذكريات
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="hero__signature reveal"
+                        data-delay="540"
+                    >
+
+                        <span></span>
+
+                        <p>
+                            <h1>
+                            منذ 2020
+                            </h1>   
+                        </p>
+                        <span></span>
+                        <p>
+                        
+                            <h1>
+                            وا الى الأن ...
+                            </h1>   
+                        </p>
+
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="#story"
+                    class="scroll-cue"
+                    aria-label="انتقل إلى الفصل الثاني"
+                >
+
+                    <span class="scroll-cue__line"></span>
+
+
+                </a>
+
+            </section>
+
+
+            <!-- =============================================
+                 CHAPTER 02 — STORY
+            ============================================== -->
+
+            <section
+                id="story"
+                class="chapter story"
+                data-section="story"
+                aria-labelledby="story-title"
+            >
+
+                <div class="container">
+
+                    <header class="section-heading">
+
+                        <div class="chapter-meta reveal">
+
+                            <span class="chapter-name">
+                                <h1>
+                                الحكاية
+                                </h1>   
+                            </span>
+
+                        </div>
+
+
+                        <p class="section-heading__eyebrow reveal">
+                            IT ALL STARTED SOMEWHERE
+                        </p>
+
+
+                        <h2
+                            id="story-title"
+                            class="section-heading__title reveal"
+                        >
+                            لم تكن مجرد بداية...
+                            <span>كانت قدرًا جميلًا.</span>
+                        </h2>
+
+
+                        <p class="section-heading__description reveal">
+                            بعض اللحظات تبدو عادية عندما تحدث،
+                            ثم نكتشف بعد سنوات أنها كانت بداية كل شيء.
+                        </p>
+
+                    </header>
+
+
+                    <div
+                        class="story-timeline"
+                        data-timeline
+                    >
+
+                        <div
+                            class="story-timeline__line"
+                            aria-hidden="true"
+                        >
+
+                            <span class="story-timeline__progress"></span>
+
+                        </div>
+
+
+                        <!-- Memory 01 -->
+
+                        <article
+                            class="story-event story-event--right"
+                            data-story-event
+                        >
+
+
+                            <div class="story-event__content">
+
+                                <span class="story-event__date">
+                                    <h1>
+                                    البداية
+                                    </h1>
+                                  </span>
+
+                                <h3>
+                                    أول لقاء
+                                </h3>
+
+                                <p>
+                                    أول لقاء غيّر مجرى حياتي حرفيًا... 
+                                    خلاني أعيش شعور وكأني ملكت الدنيا كلها. 
+                                    من أول يوم، ومن أول ساعة شفتج بيها، دخلتي لكلبي بدون استئذان،
+                                 ومن ذاك اليوم صرتِ أعز إنسانة عندي، وأكثر إنسانة أحبها بهالدنيا كلها.
+                                 وما جنت أعرف وكتها إن هاللحظة الصغيرة راح تصير بداية أجمل وأغلى حكاية عشتها بحياتي.
+                                </p>
+
+                                <span class="story-event__quote">
+                                    "ومن هنا بدأ كل شيء."
+                                </span>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Memory 02 -->
+
+                        <article
+                            class="story-event story-event--left"
+                            data-story-event
+                        >
+
+        
+
+
+                            <div class="story-event__content">
+
+                                <span class="story-event__date">
+                                    <h1>
+                                    بعد ذلك
+                                    </h1>
+                                </span>
+
+                                <h3>
+                                    أول ضحكة
+                                </h3>
+
+                                <p>
+                                   وتدرين شنو؟ ضحكتج جانت وما زالت أحلى شي عندي，
+                                 وأحب أشوفج دوم مبتسمة وفرحانة，
+                                 لأن فرحتج بالنسبة إلي مو مجرد فرحة أشوفها... 
+                                 هي فرحتي أني.  
+                                 أحبج من تضحكين، وأحب أشوف خدودج الحلوات شلون ينتفخن ويحمرن， 
+                                 وعيونج شلون تلمع وكأنها تحجي عن كل الفرح اللي بداخِلج. 
+                                 أصلا ضحكتج صارت من أجمل التفاصيل اللي أحبها بيج.
+                                 تدرين شنو مرات اني كلما أصفن وأتذكر ضحكتج، أبتسم لا إرادي， 
+                                 حتى لو ماكو سبب للضحك，
+                                 لأن مجرد ذكراها تكفيني حتى تغيّر مزاجي وتخليني أفرح.
+                                 يمكن إنتِ ما تعرفين شكد ضحكتج غيّرت بداخلي هواي أمور
+                                 لأنج ببساطة مصدر سعادتي وفرحي， 
+                                وأحب أشوفج سعيدة أكثر من أي شيء ثاني بالدنيا.
+                                </p>
+
+                                <span class="story-event__quote">
+                                    "ضحكتك بقيت في ذاكرتي."
+                                </span>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Memory 03 -->
+
+                        <article
+                            class="story-event story-event--right"
+                            data-story-event
+                        >
+
+                            
+
+
+                            <div class="story-event__content">
+
+                                <span class="story-event__date">
+                                    <h1>
+                                    أجمل الأيام
+                                    </h1>
+                                </span>
+
+                                <h3>
+                                    الذكريات
+                                </h3>
+
+                                <p>
+                                   ذكرياتنه حلوة لدرجة إن حتى من نصعد اتصال ونسولف، 
+                                    نكعد نذكر أيامنه ومواقفنه سوه ونضحك عليها، 
+                                    ونبقى نسولف ونضحك لساعات بدون ملل ولا تعب. وكأنها صايرة البارحة，
+                                    دشوفين شلون ذكرياتنه تجمعنه حتى وإحنا بعيدين， 
+                                    من طفولتنا لحد هسه，
+                                    وكل مرحلة من عمرنه بيها موقف وحكاية وضحكة ما تنسي ابدد
+                                    هواي عشنى ذكريات حلوه واحلى ذكريات عندي هي من أكون وياج 
+                                    وأحلى شي إن ذكرياتنه مو بس أحداث وهاهيه مرات احسها شعور كامل يرجع ويانه كل ما نحچي عنها، ودليل من نسولف لضحكتنه شاكّة حلكنه من نذكر موقف قديم.
+                                    ويمكن هواية من هذي اللحظات ما راح تتكرر بنفس تفاصيلها，
+                                    ولهذا أتمنى من كل كلبي لو ترجع أيامنه ونعيشها مرة ثانية，
+                                    بس مو حتى نعيد الماضي... أتمنى نعيش أيام جديدة أجمل،
+                                    ونصنع ذكريات أكثر، ونبقى بعد سنين نكعد سوه ونحچي عنها
+                                    ونضحك بنفس هالطريقة.
+                                </p>
+
+                                <span class="story-event__quote">
+                                    "الذكريات هي الأماكن التي يسكنها الحب."
+                                </span>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Today -->
+
+                        <article
+                            class="story-event story-event--left story-event--today"
+                            data-story-event
+                        >
+
+                        
+
+
+                            <div class="story-event__content">
+
+                                <span class="story-event__date">
+                                    <h1>
+                                    واليوم
+                                    </h1>
+                                </span>
+
+                                <h3>
+                                    ما زالت الحكاية مستمرة
+                                </h3>
+
+                                <p>
+                                   وإلى اليوم، بعد كل هالسنين وكل اللي عشناه سوه،
+                                    ما زالت حكايتنه مستمرة...
+                                    وما زلت أشوف إن أجمل فصولها هي الفصول اللي بعد ما عشناها.
+                                    مرّت بيناتنه أيام حلوة وأيام صعبة، وضحكنا وبچينا، وكبرنا وتغيرنا،
+                                    بس رغم كل شيء،
+                                    بقينا نرجع لبعض ونكمل الحكاية من نفس المكان اللي وقفنا بيه.
+                                    وأني ما أريد أعتبر اللي عشناه مجرد ماضي وذكريات حلوة،
+                                    لأن بالنسبة إلي الحكاية بعدها ما خلصت، وبعد عدنه هواية أيام نعيشها،
+                                    وهواية ضحكات نضحكها، وهواية أماكن نروحها، 
+                                    وهواية ذكريات جديدة نصنعها سوه.
+                                    يمكن أجمل شيء بحكايتنه إننا لحد الآن ما نعرف شلون راح تكون نهايتها...
+                                    لأنني أتمنى ما تكون إلها نهاية أصلًا.
+                                </p>
+
+                                <span class="story-event__quote">
+                                    "وهذه ليست النهاية."
+                                </span>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 INTERLUDE — QUOTE
+            ============================================== -->
+
+            <section
+                class="interlude"
+                aria-label="اقتباس"
+            >
+
+                <div class="interlude__glow" aria-hidden="true"></div>
+
+
+                <div class="container">
+
+                    <div class="interlude__content reveal">
+
+                        <span
+                            class="interlude__symbol"
+                            aria-hidden="true"
+                        >
+                            “
+                        </span>
+
+                        <blockquote>
+                            الحب الحقيقي
+                            هو أن تجد وطنك
+                            في شخص.
+                        </blockquote>
+
+                        <span class="interlude__line"></span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 CHAPTER 03 — MEMORIES
+            ============================================== -->
+
+            <section
+                id="memories"
+                class="chapter memories"
+                data-section="memories"
+                aria-labelledby="memories-title"
+            >
+
+                <div class="container">
+
+                    <header class="section-heading section-heading--split">
+
+                        <div>
+
+                            <div class="chapter-meta reveal">
+
+                                
+
+                                <span class="chapter-name">
+                                    <h1>
+                                    الذكريات
+                                    </h1>
+                                </span>
+
+                            </div>
+
+
+                            <p class="section-heading__eyebrow reveal">
+                                OUR MEMORY ARCHIVE
+                            </p>
+
+
+                            <h2
+                                id="memories-title"
+                                class="section-heading__title reveal"
+                            >
+                                لحظات
+                                <span>لا تُنسى.</span>
+                            </h2>
+
+                        </div>
+
+
+                        <p class="section-heading__side-note reveal">
+                            بعض الصور لا تحفظ لحظة فقط...
+                            <br>
+                            بل تحفظ شعورًا كاملًا.
+                        </p>
+
+                    </header>
+
+
+                    <!-- Featured Memory -->
+
+                    <div
+                        class="memory-feature reveal"
+                        data-gallery-item
+                        data-gallery-index="0"
+                    >
+
+                        <button
+                            class="memory-feature__image"
+                            type="button"
+                            data-lightbox-open
+                            aria-label="فتح الذكرى الرئيسية"
+                        >
+
+                            <img
+                                src="images/p1.jpg"
+                                alt="ذكرى جميلة من قصتنا"
+                                loading="lazy"
+                                decoding="async"
+                            >
+
+
+                            <span
+                                class="memory-feature__overlay"
+                                aria-hidden="true"
+                            ></span>
+
+
+                            <span class="memory-feature__open">
+                                <span>فتح الذكرى</span>
+                                <span>↗</span>
+                            </span>
+
+                        </button>
+
+
+                        <div class="memory-feature__caption">
+
+                            <span>
+                                MEMORY 01
+                            </span>
+
+                            <h3>
+                                لحظة تستحق أن تبقى.
+                            </h3>
+
+                            <p>
+                                ذكرى صغيرة...
+                                لكنها تحمل شعورًا كبيرًا.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Memory Grid -->
+
+                    <div class="memory-grid">
+
+                        <figure
+                            class="memory-card memory-card--tall reveal"
+                            data-gallery-item
+                            data-gallery-index="0"
+                        >
+
+                            <button
+                                type="button"
+                                class="memory-card__button"
+                                data-lightbox-open
+                                aria-label="فتح الذكرى الثانية"
+                            >
+
+                                <img
+                                    src="images/p2.jpg"
+                                    alt="ذكرى جميلة من قصتنا"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                                <span
+                                    class="memory-card__overlay"
+                                    aria-hidden="true"
+                                ></span>
+
+                                <span
+                                    class="memory-card__index"
+                                    aria-hidden="true"
+                                >
+                                    02
+                                </span>
+
+                            </button>
+
+
+                            <figcaption>
+
+                                <span>
+                                    لحظة
+                                </span>
+
+                                <strong>
+                                    بقيت في القلب.
+                                </strong>
+
+                            </figcaption>
+
+                        </figure>
+
+
+                        <figure
+                            class="memory-card memory-card--wide reveal"
+                            data-gallery-item
+                            data-gallery-index="2"
+                        >
+
+                            <button
+                                type="button"
+                                class="memory-card__button"
+                                data-lightbox-open
+                                aria-label="فتح الذكرى الثالثة"
+                            >
+
+                                <img
+                                    src="images/p3.jpg"
+                                    alt="ذكرى جميلة من قصتنا"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                                <span
+                                    class="memory-card__overlay"
+                                    aria-hidden="true"
+                                ></span>
+
+                                <span
+                                    class="memory-card__index"
+                                    aria-hidden="true"
+                                >
+                                    03
+                                </span>
+
+                            </button>
+
+
+                            <figcaption>
+
+                                <span>
+                                    تفاصيل
+                                </span>
+
+                                <strong>
+                                    لا تُنسى.
+                                </strong>
+
+                            </figcaption>
+
+                        </figure>
+
+
+                        <figure
+                            class="memory-card memory-card--small reveal"
+                            data-gallery-item
+                            data-gallery-index="3"
+                        >
+
+                            <button
+                                type="button"
+                                class="memory-card__button"
+                                data-lightbox-open
+                                aria-label="فتح الذكرى الرابعة"
+                            >
+
+                                <img
+                                    src="images/p4.jpg"
+                                    alt="ذكرى جميلة من قصتنا"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                                <span
+                                    class="memory-card__overlay"
+                                    aria-hidden="true"
+                                ></span>
+
+                                <span
+                                    class="memory-card__index"
+                                    aria-hidden="true"
+                                >
+                                    04
+                                </span>
+
+                            </button>
+
+
+                            <figcaption>
+
+                                <span>
+                                    والأجمل...
+                                </span>
+
+                                <strong>
+                                    أننا ما زلنا هنا.
+                                </strong>
+
+                            </figcaption>
+
+                        </figure>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 CHAPTER 04 — TIME
+            ============================================== -->
+
+            <section
+                id="time"
+                class="chapter time"
+                data-section="time"
+                aria-labelledby="time-title"
+            >
+
+                <div
+                    class="time__background"
+                    aria-hidden="true"
+                >
+
+                    <span class="time__ring time__ring--one"></span>
+                    <span class="time__ring time__ring--two"></span>
+                    <span class="time__ring time__ring--three"></span>
+
+                </div>
+
+
+                <div class="container">
+
+                    <div class="time__intro">
+
+                        <div class="chapter-meta reveal">
+
+                        
+
+                            <span class="chapter-name">
+                                <h1>
+                                الوقت
+                                </h1>   
+                            </span>
+
+                        </div>
+
+
+                        <p class="section-heading__eyebrow reveal">
+                            SINCE THE DAY IT STARTED
+                        </p>
+
+
+                        <h2
+                            id="time-title"
+                            class="time__title reveal"
+                        >
+                            منذ أن بدأت
+                            <span>قصتنا.</span>
+                        </h2>
+
+
+                        <p class="time__description reveal">
+                            الوقت يمضي...
+                            لكن بعض الأشياء لا تُقاس بالسنوات.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Live Counter -->
+
+                    <div
+                        id="love-counter"
+                        class="love-counter reveal"
+                        data-counter-start="2020-01-01T00:00:00"
+                        aria-live="off"
+                    >
+
+                        <div class="love-counter__main">
+
+                            <span
+                                id="counter-years"
+                                class="love-counter__years"
+                            >
+                                0
+                            </span>
+
+                            <span class="love-counter__years-label">
+                                سنوات
+                            </span>
+
+                        </div>
+
+
+                        <div class="love-counter__secondary">
+
+                            <div class="counter-unit">
+
+                                <strong id="days">
+                                    000
+                                </strong>
+
+                                <span>
+                                    يوم
+                                </span>
+
+                            </div>
+
+
+                            <div class="counter-separator">
+                                :
+                            </div>
+
+
+                            <div class="counter-unit">
+
+                                <strong id="hours">
+                                    00
+                                </strong>
+
+                                <span>
+                                    ساعة
+                                </span>
+
+                            </div>
+
+
+                            <div class="counter-separator">
+                                :
+                            </div>
+
+
+                            <div class="counter-unit">
+
+                                <strong id="minutes">
+                                    00
+                                </strong>
+
+                                <span>
+                                    دقيقة
+                                </span>
+
+                            </div>
+
+
+                            <div class="counter-separator">
+                                :
+                            </div>
+
+
+                            <div class="counter-unit">
+
+                                <strong id="seconds">
+                                    00
+                                </strong>
+
+                                <span>
+                                    ثانية
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="love-counter__origin">
+
+                            <span>
+                                01 JAN 2020
+                            </span>
+
+                            <span class="love-counter__origin-line"></span>
+
+                            <span>
+                                AND STILL COUNTING
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Small Stats -->
+
+                    <div class="time__stats">
+
+                        <article class="time-stat reveal">
+
+                            <span
+                                class="time-stat__icon"
+                                aria-hidden="true"
+                            >
+                                ♡
+                            </span>
+
+                            <strong id="loveDays">
+                                0
+                            </strong>
+
+                            <span>
+                                يومًا من الحكاية
+                            </span>
+
+                        </article>
+
+
+                        <article class="time-stat reveal">
+
+                            <span
+                                class="time-stat__icon"
+                                aria-hidden="true"
+                            >
+                                ∞
+                            </span>
+
+                            <strong>
+                                ∞
+                            </strong>
+
+                            <span>
+                                سببًا للحب
+                            </span>
+
+                        </article>
+
+
+                        <article class="time-stat reveal">
+
+                            <span
+                                class="time-stat__icon"
+                                aria-hidden="true"
+                            >
+                                ✦
+                            </span>
+
+                            <strong>
+                                100%
+                            </strong>
+
+                            <span>
+                                من القلب
+                            </span>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 MUSIC INTERLUDE
+            ============================================== -->
+
+            <section
+                id="music"
+                class="music-section"
+                aria-labelledby="music-title"
+            >
+
+                <div class="container">
+
+                    <div class="music-card reveal">
+
+                        <div class="music-card__visual">
+
+                            <div
+                                class="music-card__disc"
+                                aria-hidden="true"
+                            >
+
+                                <span>
+                                    ♡
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="music-card__content">
+
+                            <span class="chapter-label">
+                                A SOUNDTRACK TO US
+                            </span>
+
+                            <h2 id="music-title">
+                                الأغنية التي
+                                <span>تشبهنا.</span>
+                            </h2>
+
+                            <p>
+                                بعض الأغاني لا نسمعها فقط...
+                                بل نعيش داخلها.
+                            </p>
+
+
+                            <div class="music-player">
+
+                                <audio
+                                    id="bgMusic"
+                                    preload="metadata"
+                                >
+
+                                    <source
+                                        src="music/shms.m4a"
+                                        type="audio/mp4"
+                                    >
+
+                                    متصفحك لا يدعم تشغيل الصوت.
+
+                                </audio>
+
+
+                                <div class="music-player__top">
+
+                                    <button
+                                        id="music-play"
+                                        class="music-player__play"
+                                        type="button"
+                                        aria-label="تشغيل الموسيقى"
+                                        data-action="music-play"
+                                    >
+
+                                        <span
+                                            class="music-player__play-icon"
+                                            aria-hidden="true"
+                                        >
+                                            ▶
+                                        </span>
+
+                                    </button>
+
+
+                                    <div class="music-player__info">
+
+                                        <strong>
+                                            Our Song
+                                        </strong>
+
+                                        <span>
+                                            إلى غدير
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="music-player__progress">
+
+                                    <span
+                                        id="music-current-time"
+                                        class="music-player__time"
+                                    >
+                                        00:00
+                                    </span>
+
+
+                                    <input
+                                        id="music-progress"
+                                        class="music-player__range"
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value="0"
+                                        step="0.1"
+                                        aria-label="موضع الأغنية"
+                                    >
+
+
+                                    <span
+                                        id="music-duration"
+                                        class="music-player__time"
+                                    >
+                                        00:00
+                                    </span>
+
+                                </div>
+
+
+                                <div class="music-player__bottom">
+
+                                    <button
+                                        id="music-volume"
+                                        type="button"
+                                        class="music-player__control"
+                                        aria-label="كتم الصوت"
+                                        aria-pressed="false"
+                                    >
+                                        ♫
+                                    </button>
+
+
+                                    <input
+                                        id="music-volume-range"
+                                        class="music-player__volume"
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        value="1"
+                                        step="0.01"
+                                        aria-label="مستوى الصوت"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 CHAPTER 05 — LETTER
+            ============================================== -->
+
+            <section
+                id="letter"
+                class="chapter letter"
+                data-section="letter"
+                aria-labelledby="letter-title"
+            >
+
+                <div class="container">
+
+                    <div class="letter__intro">
+
+                        <div class="chapter-meta reveal">
+
+
+                            <span class="chapter-name">
+                                <h1>  
+                                الرسالة
+                                </h1>   
+                            </span>
+
+                        </div>
+
+
+                        <p class="section-heading__eyebrow reveal">
+                            A LETTER FOR YOU
+                        </p>
+
+
+                        <h2
+                            id="letter-title"
+                            class="section-heading__title reveal"
+                        >
+                            أشياء كثيرة...
+                            <span>لم أقلها.</span>
+                        </h2>
+
+                    </div>
+
+
+                    <article
+                        id="love-letter"
+                        class="love-letter reveal"
+                        data-letter
+                    >
+
+                        <div
+                            class="love-letter__light"
+                            aria-hidden="true"
+                        ></div>
+
+
+                        <div class="love-letter__top">
+
+                            <span>
+                                TO: GHADEER
+                            </span>
+
+                            <span>
+                                01.01.2020 — ∞
+                            </span>
+
+                        </div>
+
+
+                        <div class="love-letter__body">
+
+                            <p class="love-letter__salutation">
+                                غدير،
+                            </p>
+
+
+                            <div
+                                id="letter-text"
+                                class="love-letter__text"
+                                data-typing-target
+                            >
+
+                                <p>
+                                   ربما مهما كتبت، ومهما حاولت أرتب الكلام،
+                                    تبقى الكلمات عاجزة عن وصف كل الشعور اللي بداخلي تجاهج، 
+                                    لأن وجودج بحياتي صار أكبر من مجرد شخص أحبه...
+                                    صار جزء من أيامي، من تفاصيلها， 
+                                    ومن كل الأشياء الحلوة اللي أعيشها.
+                                </p>
+
+                                <p>
+                                    أعرف شيء واحد بس...
+                                    أن وجودج بحياتي من أجمل النعم اللي حصلت عليها，
+                                    وأني ممتن لكل لحظة جمعتني بيج， لكل ضحكة، لكل موقف， 
+                                    ولكل ذكرى صارت بيناتنه.
+                                </p>
+
+                                <p>
+                                    أتمنى أن تبقى ابتسامتك سببًا لسعادتي，
+                                    وأن نبقى معًا مهما مرّت الأيام，          
+                                    وأن تستمر هذه الحكاية في كتابة
+                                    فصولها الجميلة.
+                                </p>
+
+                                <p>
+                                    لأن أجمل شيء في قصتنا...
+                                    أنها ما زالت مستمرة.
+                                </p>
+
+                            </div>
+
+
+                            <p class="love-letter__signature">
+                                من شخص
+                                <span>يحبك أكثر مما تستطيع الكلمات قوله.</span>
+                            </p>
+
+                        </div>
+
+
+                        <div class="love-letter__bottom">
+
+                            <span class="love-letter__heart">
+                                ♡
+                            </span>
+
+                            <span>
+                                FOREVER, IN EVERY CHAPTER.
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 CHAPTER 06 — QUESTION
+            ============================================== -->
+
+            <section
+                id="question"
+                class="chapter question"
+                data-section="question"
+                aria-labelledby="question-title"
+            >
+
+                <div
+                    class="question__atmosphere"
+                    aria-hidden="true"
+                >
+
+                    <span class="question__orb question__orb--one"></span>
+
+                    <span class="question__orb question__orb--two"></span>
+
+                    <span class="question__heart question__heart--one">
+                        ♡
+                    </span>
+
+                    <span class="question__heart question__heart--two">
+                        ♡
+                    </span>
+
+                </div>
+
+
+                <div class="container">
+
+                    <div class="question__content">
+
+                        <div class="chapter-meta reveal">
+
+                            
+
+                            <span class="chapter-name">
+                                <h1>  
+                                السؤال الأخير
+                                </h1>
+                            </span>
+
+                        </div>
+
+
+                        <p class="question__eyebrow reveal">
+                            <h1>
+                            قبل أن تنتهي الحكاية...
+                            </h1>
+                        </p>
+                            <h1>        
+                            BEFORE THE STORY ENDS...
+                            </h1>
+                        </p>
+
+
+                        <span
+                            class="question__symbol reveal"
+                            aria-hidden="true"
+                        >
+                            ♡
+                        </span>
+
+
+                        <h2
+                            id="question-title"
+                            class="question__title reveal"
+                        >
+                            هل تحبيني؟
+                        </h2>
+
+
+                        <p
+                            id="question-subtitle"
+                            class="question__subtitle reveal"
+                        >
+                            أريد إجابة واحدة فقط...
+                            من قلبك.
+                        </p>
+
+
+                        <div
+                            id="question-actions"
+                            class="question__actions reveal"
+                        >
+
+                            <button
+                                id="yes-btn"
+                                class="question-button question-button--yes"
+                                type="button"
+                                data-answer="yes"
+                            >
+
+                                <span>
+                                    نعم ❤️
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                id="no-btn"
+                                class="question-button question-button--no"
+                                type="button"
+                                data-answer="no"
+                            >
+
+                                <span>
+                                    لا
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <p
+                            id="no-message"
+                            class="question__feedback"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Celebration -->
+
+                <div
+                    id="celebration"
+                    class="celebration"
+                    aria-hidden="true"
+                >
+
+                    <canvas
+                        id="celebration-canvas"
+                        class="celebration__canvas"
+                        aria-hidden="true"
+                    ></canvas>
+
+
+                    <div class="celebration__content">
+
+                        <span
+                            class="celebration__heart"
+                            aria-hidden="true"
+                        >
+                            ♥
+                        </span>
+
+
+                        <p class="celebration__eyebrow">
+                            I KNEW IT
+                        </p>
+
+
+                        <h2>
+                            جنت أعرف...واني اموت بيج ❤️
+                        </h2>
+
+
+                        <p>
+                            بعض الإجابات لا تحتاج إلى كلمات.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 FINAL SCENE
+            ============================================== -->
+
+            <section
+                id="finale"
+                class="finale"
+                aria-labelledby="finale-title"
+            >
+
+                <div
+                    class="finale__background"
+                    aria-hidden="true"
+                >
+
+                    <span class="finale__glow"></span>
+
+                    <span class="finale__star finale__star--one"></span>
+
+                    <span class="finale__star finale__star--two"></span>
+
+                    <span class="finale__star finale__star--three"></span>
+
+                </div>
+
+
+                <div class="container">
+
+                    <div class="finale__content">
+
+                        <span
+                            class="finale__heart"
+                            aria-hidden="true"
+                        >
+                            ♡
+                        </span>
+
+
+                        <p class="finale__eyebrow">
+                            THE END OF THIS CHAPTER
+                        </p>
+
+
+                        <h2 id="finale-title">
+                            وهذه ليست النهاية...
+                        </h2>
+
+
+                        <p class="finale__message">
+                            لأن أجمل القصص
+                            هي التي لا نعرف كيف ستنتهي،
+                            ونختار مع ذلك أن نكملها معًا.
+                        </p>
+
+
+                        <div class="finale__signature">
+
+                            <span></span>
+
+                            <strong>
+                                إلى غدير
+                            </strong>
+
+                            <span></span>
+
+                        </div>
+
+
+                        <button
+                            id="restart-story"
+                            class="button button--ghost finale__restart"
+                            type="button"
+                            data-action="restart-story"
+                        >
+                            عِش القصة من جديد
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =================================================
+             FLOATING MUSIC PLAYER
+        ================================================== -->
+
+        <aside
+            id="floating-music-player"
+            class="floating-music"
+            aria-label="مشغل الموسيقى"
+            aria-hidden="true"
+        >
+
+            <button
+                id="floating-music-toggle"
+                class="floating-music__toggle"
+                type="button"
+                aria-label="تشغيل الموسيقى"
+                aria-pressed="false"
+            >
+
+                <span
+                    class="floating-music__bars"
+                    aria-hidden="true"
+                >
+
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+
+                </span>
+
+            </button>
+
+
+            <div class="floating-music__info">
+
+                <span>
+                    NOW PLAYING
+                </span>
+
+                <strong>
+                    Our Song
+                </strong>
+
+            </div>
+
+
+            <button
+                id="floating-music-close"
+                class="floating-music__close"
+                type="button"
+                aria-label="إخفاء مشغل الموسيقى"
+            >
+                ×
+            </button>
+
+        </aside>
+
+
+        <!-- =================================================
+             BACK TO TOP
+        ================================================== -->
+
+        <button
+            id="backTop"
+            class="back-top"
+            type="button"
+            aria-label="العودة إلى أعلى الصفحة"
+        >
+
+            <span aria-hidden="true">
+                ↑
+            </span>
+
+        </button>
+
+
+        <!-- =================================================
+             LIGHTBOX
+        ================================================== -->
+
+        <div
+            id="lightbox"
+            class="lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="lightbox-caption"
+            aria-hidden="true"
+        >
+
+            <div
+                class="lightbox__backdrop"
+                data-lightbox-close
+            ></div>
+
+
+            <div class="lightbox__container">
+
+
+                <!-- Close -->
+
+                <button
+                    id="closeLightbox"
+                    class="lightbox__close"
+                    type="button"
+                    aria-label="إغلاق معرض الصور"
+                    data-lightbox-close
+                >
+                    ×
+                </button>
+
+
+                <!-- Previous -->
+
+                <button
+                    id="lightbox-prev"
+                    class="lightbox__navigation lightbox__navigation--prev"
+                    type="button"
+                    aria-label="الصورة السابقة"
+                    data-lightbox-prev
+                >
+                    <span aria-hidden="true">
+                        →
+                    </span>
+                </button>
+
+
+                <!-- Image -->
+
+                <div
+                    id="lightbox-stage"
+                    class="lightbox__stage"
+                >
+
+                    <div
+                        id="lightbox-loader"
+                        class="lightbox__loader"
+                        aria-hidden="true"
+                    >
+                        <span></span>
+                    </div>
+
+
+                    <img
+                        id="lightboxImage"
+                        class="lightbox__image"
+                        src=""
+                        alt=""
+                        draggable="false"
+                    >
+
+
+                    <div
+                        class="lightbox__zoom-hint"
+                        aria-hidden="true"
+                    >
+                        اسحب للتحريك · انقر للتكبير
+                    </div>
+
+                </div>
+
+
+                <!-- Next -->
+
+                <button
+                    id="lightbox-next"
+                    class="lightbox__navigation lightbox__navigation--next"
+                    type="button"
+                    aria-label="الصورة التالية"
+                    data-lightbox-next
+                >
+                    <span aria-hidden="true">
+                        ←
+                    </span>
+                </button>
+
+
+                <!-- Caption -->
+
+                <div class="lightbox__footer">
+
+                    <div
+                        id="lightbox-caption"
+                        class="lightbox__caption"
+                    >
+
+                        <span id="lightbox-counter">
+                            01 / 04
+                        </span>
+
+                        <strong id="lightbox-title">
+                            ذكرى جميلة
+                        </strong>
+
+                    </div>
+
+
+                    <div class="lightbox__tools">
+
+                        <button
+                            id="lightbox-zoom-in"
+                            type="button"
+                            aria-label="تكبير الصورة"
+                            data-lightbox-zoom-in
+                        >
+                            +
+                        </button>
+
+
+                        <button
+                            id="lightbox-zoom-reset"
+                            type="button"
+                            aria-label="إعادة حجم الصورة"
+                            data-lightbox-zoom-reset
+                        >
+                            1:1
+                        </button>
+
+
+                        <button
+                            id="lightbox-zoom-out"
+                            type="button"
+                            aria-label="تصغير الصورة"
+                            data-lightbox-zoom-out
+                        >
+                            −
+                        </button>
+
+
+                        <button
+                            id="lightbox-fullscreen"
+                            type="button"
+                            aria-label="ملء الشاشة"
+                            data-lightbox-fullscreen
+                        >
+                            ⛶
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             MOBILE BOTTOM NAVIGATION
+        ================================================== -->
+
+        <nav
+            class="mobile-bottom-nav"
+            aria-label="تنقل سريع"
+        >
+
+            <a
+                href="#home"
+                data-section="home"
+                data-nav-link
+                aria-label="البداية"
+            >
+                <span aria-hidden="true">01</span>
+                <small>البداية</small>
+            </a>
+
+
+            <a
+                href="#story"
+                data-section="story"
+                data-nav-link
+                aria-label="الحكاية"
+            >
+                <span aria-hidden="true">02</span>
+                <small>الحكاية</small>
+            </a>
+
+
+            <a
+                href="#memories"
+                data-section="memories"
+                data-nav-link
+                aria-label="الذكريات"
+            >
+                <span aria-hidden="true">03</span>
+                <small>الذكريات</small>
+            </a>
+
+
+            <a
+                href="#time"
+                data-section="time"
+                data-nav-link
+                aria-label="الوقت"
+            >
+                <span aria-hidden="true">04</span>
+                <small>الوقت</small>
+            </a>
+
+
+            <a
+                href="#question"
+                data-section="question"
+                data-nav-link
+                aria-label="السؤال الأخير"
+            >
+                <span aria-hidden="true">06</span>
+                <small>♡</small>
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="site-footer">
+
+            <div class="container">
+
+                <div class="site-footer__content">
+
+                    <span class="site-footer__symbol">
+                        ♡
+                    </span>
+
+
+                    <p class="site-footer__title">
+                        إلى غدير
+                    </p>
+
+
+                    <p class="site-footer__text">
+                        Every heartbeat writes another chapter.
+                    </p>
+
+
+                    <div class="site-footer__line"></div>
+
+
+                    <p class="site-footer__copyright">
+                        Made with love · 2026 — ∞
+                    </p>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <!-- =====================================================
+         NOSCRIPT
+    ====================================================== -->
+
+    <noscript>
+
+        <div class="noscript-message">
+
+            <h1>
+                ❤️ إلى غدير ❤️
+            </h1>
+
+            <p>
+                هذا الموقع يحتاج إلى JavaScript
+                ليعمل كتجربة تفاعلية كاملة.
+            </p>
+
+        </div>
+
+    </noscript>
+
+
+    <!-- =====================================================
+         APPLICATION SCRIPTS
+    ====================================================== -->
+
+    <script
+        src="js/config.js"
+        type="module"
+        defer
+    ></script>
+
+    <script
+        src="js/utils.js"
+        type="module"
+        defer
+    ></script>
+
+    <script
+        src="js/animations.js"
+        defer
+    ></script>
+
+    <script
+        src="js/password.js"
+        defer
+    ></script>
+
+    <script
+        src="js/counter.js"
+        defer
+    ></script>
+
+    <script
+        src="js/gallery.js"
+        defer
+    ></script>
+
+    <script
+        src="js/music.js"
+        defer
+    ></script>
+
+    <script
+        src="js/joke.js"
+        defer
+    ></script>
+
+    <script
+        src="js/script.js"
+        defer
+    ></script>
+
+</body>
+
+</html>

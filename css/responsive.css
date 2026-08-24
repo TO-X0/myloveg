@@ -1,0 +1,2242 @@
+/* =========================================================
+   ❤️ إلى غدير ❤️
+   VERSION 2.0 — DIGITAL LOVE EXPERIENCE
+
+   FILE: css/responsive.css
+
+   Responsive System
+   ---------------------------------------------------------
+   1920+  Large Desktop
+   1440   Desktop
+   1200   Small Desktop
+   1100   Compact Desktop
+   900    Mobile Navigation
+   768    Tablet
+   640    Large Mobile
+   480    Mobile
+   414    Large iPhone
+   390    Compact Mobile
+   375    Small Mobile
+
+   Goals:
+   - Prevent horizontal overflow
+   - Keep RTL layout stable
+   - Improve touch targets
+   - Improve iPhone safe-area support
+   - Avoid conflicting responsive rules
+   - Preserve existing visual identity
+   ========================================================= */
+
+
+/* =========================================================
+   01. LARGE DESKTOP
+   1920px+
+   ========================================================= */
+
+@media (min-width: 1920px) {
+
+    :root {
+        --container-width: 1380px;
+        --container-padding: 44px;
+    }
+
+    .hero {
+        padding-inline: 40px;
+    }
+
+    .hero-content {
+        max-width: 980px;
+    }
+
+    .hero-title {
+        font-size: clamp(5.5rem, 7vw, 8.5rem);
+    }
+
+    .hero-description {
+        max-width: 720px;
+        font-size: 1.15rem;
+    }
+
+    .story-layout {
+        width: min(1200px, 100%);
+    }
+
+    .memory-gallery {
+        grid-auto-rows: 120px;
+    }
+
+    .reasons-grid {
+        gap: 24px;
+    }
+
+    .question-card {
+        max-width: 980px;
+    }
+
+    .letter {
+        max-width: 920px;
+    }
+}
+
+
+/* =========================================================
+   02. DESKTOP
+   1440px — 1919px
+   ========================================================= */
+
+@media (min-width: 1440px) and (max-width: 1919px) {
+
+    .hero-title {
+        font-size: clamp(5rem, 7vw, 7rem);
+    }
+
+    .hero-description {
+        max-width: 680px;
+    }
+
+    .story-layout {
+        width: min(1120px, 100%);
+    }
+
+    .memory-gallery {
+        grid-auto-rows: 110px;
+    }
+}
+
+
+/* =========================================================
+   03. SMALL DESKTOP
+   1200px — 1439px
+   ========================================================= */
+
+@media (max-width: 1439px) {
+
+    .site-nav,
+    .glass-navbar {
+        width: calc(100% - 40px);
+    }
+
+    .hero-content {
+        max-width: 900px;
+    }
+
+    .hero-title {
+        font-size: clamp(4.5rem, 7vw, 6.5rem);
+    }
+
+    .story-layout {
+        width: min(1040px, calc(100% - 40px));
+    }
+
+    .memory-gallery {
+        grid-auto-rows: 95px;
+    }
+
+    .counter-wrapper {
+        width: min(960px, calc(100% - 40px));
+    }
+}
+
+
+/* =========================================================
+   04. COMPACT DESKTOP
+   <= 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    :root {
+        --container-padding: 24px;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-links a {
+        padding-inline: 10px;
+    }
+
+    .reasons-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .memory-gallery {
+        grid-auto-rows: 90px;
+    }
+
+    .hero {
+        padding-top: 135px;
+    }
+
+    .hero-title {
+        font-size: clamp(4rem, 8vw, 6rem);
+    }
+
+    .hero-description {
+        max-width: 620px;
+    }
+
+    .story-layout {
+        width: min(960px, calc(100% - 40px));
+    }
+
+    .story-card {
+        padding: 28px;
+    }
+
+    .counter-wrapper {
+        width: min(900px, calc(100% - 40px));
+    }
+
+    .music-player {
+        max-width: 360px;
+    }
+}
+
+
+/* =========================================================
+   05. MOBILE NAVIGATION
+   <= 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    :root {
+        --container-padding: 20px;
+        --header-height: 74px;
+    }
+
+
+    /* -----------------------------------------------------
+       Navigation
+       ----------------------------------------------------- */
+
+    .site-nav,
+    .glass-navbar {
+        width: calc(100% - 24px);
+        top: 12px;
+        margin-inline: auto;
+    }
+
+    .nav-links,
+    .glass-navbar nav ul {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        display: grid;
+        place-items: center;
+
+        width: 44px;
+        height: 44px;
+
+        flex: 0 0 auto;
+
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 50%;
+
+        color: var(--text, #fff);
+        background: rgba(255, 255, 255, 0.035);
+
+        cursor: pointer;
+
+        transition:
+            transform 250ms ease,
+            background 250ms ease,
+            border-color 250ms ease;
+    }
+
+    .mobile-menu-button:hover,
+    .mobile-menu-button:focus-visible {
+        transform: translateY(-2px);
+
+        border-color:
+            rgba(255, 59, 104, 0.28);
+
+        background:
+            rgba(255, 59, 104, 0.08);
+    }
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+    .nav-icon-button {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    /* -----------------------------------------------------
+       Mobile Menu
+       ----------------------------------------------------- */
+
+    .mobile-menu {
+        position: fixed;
+        inset: 0;
+
+        z-index: 750;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        padding:
+            calc(90px + env(safe-area-inset-top))
+            24px
+            calc(40px + env(safe-area-inset-bottom));
+
+        background:
+            rgba(5, 4, 7, 0.96);
+
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transform: translateY(-12px);
+
+        transition:
+            opacity 300ms ease,
+            visibility 300ms ease,
+            transform 300ms ease;
+
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .mobile-menu.is-open,
+    .mobile-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .mobile-menu nav,
+    .mobile-menu ul {
+        width: 100%;
+        max-width: 520px;
+    }
+
+    .mobile-menu ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: 8px;
+
+        margin: 0;
+        padding: 0;
+
+        list-style: none;
+    }
+
+    .mobile-menu a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        min-height: 58px;
+
+        padding: 12px 22px;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.055);
+
+        border-radius:
+            var(--radius-pill, 999px);
+
+        color:
+            var(--text-soft, #e8dce2);
+
+        background:
+            rgba(255, 255, 255, 0.025);
+
+        font-size: 1rem;
+        font-weight: 600;
+
+        text-decoration: none;
+
+        transition:
+            transform 250ms ease,
+            color 250ms ease,
+            background 250ms ease,
+            border-color 250ms ease;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a:focus-visible,
+    .mobile-menu a.active {
+        transform: translateY(-2px);
+
+        color: var(--white, #fff);
+
+        border-color:
+            rgba(255, 59, 104, 0.25);
+
+        background:
+            rgba(255, 59, 104, 0.08);
+    }
+
+
+    /* -----------------------------------------------------
+       Hero
+       ----------------------------------------------------- */
+
+    .hero {
+        min-height: 100svh;
+
+        padding:
+            calc(130px + env(safe-area-inset-top))
+            24px
+            calc(90px + env(safe-area-inset-bottom));
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 760px;
+    }
+
+    .hero-title {
+        font-size:
+            clamp(
+                3.8rem,
+                11vw,
+                5.5rem
+            );
+
+        line-height: 0.98;
+    }
+
+    .hero-description {
+        max-width: 620px;
+
+        font-size:
+            clamp(
+                0.95rem,
+                2vw,
+                1.08rem
+            );
+    }
+
+    .hero-actions,
+    .hero-buttons {
+        flex-wrap: wrap;
+    }
+
+
+    /* -----------------------------------------------------
+       Story
+       ----------------------------------------------------- */
+
+    .story-section {
+        padding-block:
+            clamp(
+                90px,
+                13vw,
+                150px
+            );
+    }
+
+    .story-layout {
+        width:
+            min(
+                760px,
+                calc(100% - 32px)
+            );
+    }
+
+    .story-line {
+        right: 22px;
+        left: auto;
+
+        transform:
+            translateX(50%);
+    }
+
+    .story-item,
+    .story-row,
+    .story-item:nth-child(even),
+    .story-row:nth-child(even) {
+        width: 100%;
+
+        padding-right: 60px;
+        padding-left: 0;
+
+        text-align: right;
+    }
+
+    .story-card {
+        width: 100%;
+        max-width: none;
+
+        padding:
+            28px 24px;
+    }
+
+    .story-dot {
+        right: 22px;
+        left: auto;
+
+        transform:
+            translateX(50%);
+    }
+
+
+    /* -----------------------------------------------------
+       Gallery
+       ----------------------------------------------------- */
+
+    .memory-gallery {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        grid-auto-rows: 110px;
+
+        gap: 12px;
+    }
+
+    .gallery-item:nth-child(1),
+    .memory-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 3;
+    }
+
+    .gallery-item:nth-child(2),
+    .gallery-item:nth-child(3),
+    .memory-item:nth-child(2),
+    .memory-item:nth-child(3) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+
+    /* -----------------------------------------------------
+       Counter
+       ----------------------------------------------------- */
+
+    .counter-wrapper {
+        width:
+            min(
+                760px,
+                calc(100% - 32px)
+            );
+    }
+
+    .counter-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+
+    /* -----------------------------------------------------
+       Letter
+       ----------------------------------------------------- */
+
+    .letter {
+        width:
+            min(
+                760px,
+                calc(100% - 32px)
+            );
+
+        padding:
+            clamp(
+                32px,
+                6vw,
+                58px
+            );
+    }
+
+
+    /* -----------------------------------------------------
+       Question
+       ----------------------------------------------------- */
+
+    .question-card {
+        width:
+            min(
+                760px,
+                calc(100% - 32px)
+            );
+
+        padding:
+            clamp(
+                32px,
+                6vw,
+                60px
+            );
+    }
+
+    .question-actions {
+        gap: 12px;
+    }
+
+
+    /* -----------------------------------------------------
+       Music
+       ----------------------------------------------------- */
+
+    .music-player {
+        right: 14px;
+        bottom: 14px;
+
+        width:
+            min(
+                360px,
+                calc(100% - 28px)
+            );
+    }
+
+
+    /* -----------------------------------------------------
+       Gallery Lightbox
+       ----------------------------------------------------- */
+
+    .gallery-window {
+        width:
+            min(
+                92vw,
+                1100px
+            );
+
+        height:
+            min(
+                90vh,
+                900px
+            );
+    }
+}
+
+
+/* =========================================================
+   06. TABLET PORTRAIT
+   <= 768px
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    :root {
+        --container-padding: 18px;
+        --section-space:
+            clamp(85px, 12vw, 125px);
+    }
+
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+
+    /* -----------------------------------------------------
+       Header
+       ----------------------------------------------------- */
+
+    .site-nav,
+    .glass-navbar {
+        width: calc(100% - 20px);
+
+        padding:
+            8px 12px;
+    }
+
+    .nav-brand,
+    .glass-navbar .logo {
+        min-width: 0;
+    }
+
+    .nav-brand span,
+    .glass-navbar .logo span {
+        overflow: hidden;
+
+        max-width: 140px;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+
+    /* -----------------------------------------------------
+       Hero
+       ----------------------------------------------------- */
+
+    .hero {
+        padding:
+            calc(120px + env(safe-area-inset-top))
+            20px
+            82px;
+    }
+
+    .hero-title {
+        font-size:
+            clamp(
+                3.4rem,
+                12vw,
+                5rem
+            );
+
+        letter-spacing:
+            -0.045em;
+    }
+
+    .hero-description {
+        line-height: 1.95;
+    }
+
+    .hero-actions,
+    .hero-buttons {
+        width: 100%;
+
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-actions .btn,
+    .hero-buttons .btn,
+    .hero-actions button,
+    .hero-buttons button {
+        width: 100%;
+    }
+
+    .hero-scroll {
+        bottom:
+            calc(18px + env(safe-area-inset-bottom));
+    }
+
+
+    /* -----------------------------------------------------
+       Chapter
+       ----------------------------------------------------- */
+
+    .chapter-marker {
+        margin-bottom: 14px;
+        font-size: 0.64rem;
+    }
+
+
+    /* -----------------------------------------------------
+       Story
+       ----------------------------------------------------- */
+
+    .story-layout {
+        width:
+            calc(100% - 24px);
+    }
+
+    .story-line {
+        right: 18px;
+    }
+
+    .story-item,
+    .story-row,
+    .story-item:nth-child(even),
+    .story-row:nth-child(even) {
+        padding-right: 48px;
+        padding-left: 0;
+
+        text-align: right;
+    }
+
+    .story-dot {
+        right: 18px;
+    }
+
+    .story-card {
+        padding:
+            24px 20px;
+    }
+
+    .story-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .story-card p {
+        font-size: 0.92rem;
+        line-height: 2;
+    }
+
+
+    /* -----------------------------------------------------
+       Gallery
+       ----------------------------------------------------- */
+
+    .memory-gallery {
+        grid-auto-rows: 95px;
+        gap: 10px;
+    }
+
+    .gallery-item,
+    .memory-item {
+        border-radius:
+            var(--radius-md, 22px);
+    }
+
+    .memory-overlay {
+        padding: 16px;
+    }
+
+    .memory-overlay h3,
+    .memory-overlay strong {
+        font-size: 0.9rem;
+    }
+
+    .memory-overlay p,
+    .memory-overlay span {
+        font-size: 0.68rem;
+    }
+
+
+    /* -----------------------------------------------------
+       Counter
+       ----------------------------------------------------- */
+
+    .counter-wrapper {
+        width:
+            calc(100% - 24px);
+
+        gap: 10px;
+    }
+
+    .counter-card {
+        padding:
+            24px 12px;
+    }
+
+    .counter-card h3,
+    .stat-card h2 {
+        font-size: 1.7rem;
+    }
+
+    .counter-card span,
+    .stat-card p {
+        font-size: 0.65rem;
+    }
+
+
+    /* -----------------------------------------------------
+       Letter
+       ----------------------------------------------------- */
+
+    .letter {
+        width:
+            calc(100% - 24px);
+
+        padding:
+            32px 24px;
+    }
+
+    .letter p {
+        font-size: 0.95rem;
+        line-height: 2.25;
+    }
+
+
+    /* -----------------------------------------------------
+       Question
+       ----------------------------------------------------- */
+
+    .question-card {
+        width:
+            calc(100% - 24px);
+
+        padding:
+            34px 22px;
+    }
+
+    .question-actions {
+        position: relative;
+        min-height: 130px;
+    }
+
+    .answer-button {
+        min-width: 130px;
+    }
+
+
+    /* -----------------------------------------------------
+       Music
+       ----------------------------------------------------- */
+
+    .music-player {
+        right: 12px;
+        bottom: 12px;
+
+        width:
+            calc(100% - 24px);
+
+        max-width: none;
+    }
+
+
+    /* -----------------------------------------------------
+       Back to top
+       ----------------------------------------------------- */
+
+    .back-top,
+    #backTop {
+        left: 12px;
+        bottom:
+            calc(12px + env(safe-area-inset-bottom));
+
+        width: 42px;
+        height: 42px;
+    }
+
+
+    /* -----------------------------------------------------
+       Lightbox
+       ----------------------------------------------------- */
+
+    .gallery-window {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+        height: 100%;
+
+        padding-top:
+            calc(56px + env(safe-area-inset-top));
+
+        border-radius: 0;
+    }
+
+    .gallery-stage {
+        flex: 1;
+
+        min-height: 0;
+        width: 100%;
+    }
+
+    .gallery-stage img {
+        max-width: 100%;
+        max-height: 100%;
+
+        object-fit: contain;
+    }
+
+    .gallery-close {
+        top:
+            calc(10px + env(safe-area-inset-top));
+
+        right: 10px;
+    }
+
+    .gallery-prev,
+    .gallery-next {
+        width: 44px;
+        height: 44px;
+    }
+
+    .gallery-bottom {
+        padding:
+            12px 16px
+            calc(20px + env(safe-area-inset-bottom));
+    }
+
+    .gallery-caption {
+        max-width: 80%;
+        font-size: 0.8rem;
+    }
+}
+
+
+/* =========================================================
+   07. LARGE MOBILE
+   <= 640px
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    :root {
+        --container-padding: 16px;
+    }
+
+
+    /* -----------------------------------------------------
+       Navigation
+       ----------------------------------------------------- */
+
+    .site-nav,
+    .glass-navbar {
+        top: 8px;
+
+        width:
+            calc(100% - 16px);
+
+        border-radius:
+            var(--radius-md, 22px);
+    }
+
+    .nav-icon-button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .mobile-menu-button {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    /* -----------------------------------------------------
+       Hero
+       ----------------------------------------------------- */
+
+    .hero {
+        padding:
+            calc(110px + env(safe-area-inset-top))
+            16px
+            78px;
+    }
+
+    .hero-title {
+        font-size:
+            clamp(
+                3rem,
+                14vw,
+                4.4rem
+            );
+    }
+
+    .hero-description {
+        font-size: 0.94rem;
+        line-height: 1.9;
+    }
+
+    .hero-scroll-line {
+        height: 38px;
+    }
+
+
+    /* -----------------------------------------------------
+       Section headings
+       ----------------------------------------------------- */
+
+    .section-heading h2,
+    .section-title {
+        font-size:
+            clamp(
+                2rem,
+                9vw,
+                3rem
+            );
+    }
+
+    .section-heading p,
+    .section-description {
+        font-size: 0.9rem;
+        line-height: 1.9;
+    }
+
+
+    /* -----------------------------------------------------
+       Reasons
+       ----------------------------------------------------- */
+
+    .reasons-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .reason-card {
+        padding:
+            24px 20px;
+    }
+
+
+    /* -----------------------------------------------------
+       Story
+       ----------------------------------------------------- */
+
+    .story-layout {
+        width:
+            calc(100% - 16px);
+    }
+
+    .story-line {
+        right: 14px;
+    }
+
+    .story-item,
+    .story-row,
+    .story-item:nth-child(even),
+    .story-row:nth-child(even) {
+        padding-right: 40px;
+    }
+
+    .story-dot {
+        right: 14px;
+
+        width: 12px;
+        height: 12px;
+    }
+
+
+    /* -----------------------------------------------------
+       Gallery
+       ----------------------------------------------------- */
+
+    .memory-gallery {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        grid-auto-rows: 88px;
+
+        gap: 8px;
+    }
+
+    .gallery-item:nth-child(1),
+    .memory-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 3;
+    }
+
+    .gallery-item:nth-child(n + 2),
+    .memory-item:nth-child(n + 2) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+
+    /* -----------------------------------------------------
+       Counter
+       ----------------------------------------------------- */
+
+    .counter-wrapper,
+    .counter-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 8px;
+    }
+
+    .counter-card {
+        padding:
+            20px 8px;
+
+        border-radius:
+            var(--radius-md, 22px);
+    }
+
+    .counter-card h3,
+    .stat-card h2 {
+        font-size: 1.5rem;
+    }
+
+
+    /* -----------------------------------------------------
+       Letter
+       ----------------------------------------------------- */
+
+    .letter,
+    .message-card {
+        width:
+            calc(100% - 16px);
+
+        padding:
+            28px 20px;
+    }
+
+    .message-card p,
+    .letter p {
+        font-size: 0.9rem;
+        line-height: 2.15;
+    }
+
+
+    /* -----------------------------------------------------
+       Question
+       ----------------------------------------------------- */
+
+    .question-card {
+        width:
+            calc(100% - 16px);
+
+        padding:
+            30px 18px;
+    }
+
+    .question-actions {
+        flex-direction: column;
+
+        min-height: 150px;
+
+        gap: 10px;
+    }
+
+    .answer-button {
+        width:
+            min(100%, 280px);
+
+        min-width: 0;
+    }
+
+
+    /* -----------------------------------------------------
+       Music
+       ----------------------------------------------------- */
+
+    .music-player {
+        right: 8px;
+        bottom:
+            calc(8px + env(safe-area-inset-bottom));
+
+        width:
+            calc(100% - 16px);
+
+        padding: 10px;
+    }
+
+    .music-art {
+        width: 46px;
+        height: 46px;
+
+        border-radius: 13px;
+    }
+
+    .music-control {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    /* -----------------------------------------------------
+       Lightbox controls
+       ----------------------------------------------------- */
+
+    .gallery-prev {
+        position: absolute;
+
+        right: 12px;
+        bottom:
+            calc(76px + env(safe-area-inset-bottom));
+    }
+
+    .gallery-next {
+        position: absolute;
+
+        left: 12px;
+        bottom:
+            calc(76px + env(safe-area-inset-bottom));
+    }
+
+    .gallery-bottom {
+        width: 100%;
+        padding-inline: 8px;
+    }
+
+    .gallery-caption {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   08. MOBILE
+   <= 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    :root {
+        --container-padding: 14px;
+        --section-space: 82px;
+    }
+
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        min-width: 0;
+    }
+
+    img,
+    video,
+    canvas,
+    svg {
+        max-width: 100%;
+    }
+
+
+    /* -----------------------------------------------------
+       Navigation
+       ----------------------------------------------------- */
+
+    .site-nav,
+    .glass-navbar {
+        width:
+            calc(100% - 14px);
+
+        padding:
+            7px 9px;
+    }
+
+    .nav-brand span,
+    .glass-navbar .logo span {
+        max-width: 105px;
+        font-size: 0.78rem;
+    }
+
+    .nav-actions {
+        gap: 4px;
+    }
+
+    .nav-icon-button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .mobile-menu-button {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    /* -----------------------------------------------------
+       Opening
+       ----------------------------------------------------- */
+
+    .opening {
+        padding:
+            24px 16px;
+    }
+
+    .opening-content {
+        width: 100%;
+    }
+
+    .opening-title {
+        font-size:
+            clamp(
+                2.5rem,
+                13vw,
+                3.4rem
+            );
+
+        line-height: 1;
+    }
+
+    .opening-subtitle {
+        font-size: 0.85rem;
+        line-height: 1.8;
+    }
+
+
+    /* -----------------------------------------------------
+       Vault
+       ----------------------------------------------------- */
+
+    .vault {
+        padding: 18px;
+    }
+
+    .vault-card {
+        width: 100%;
+
+        padding:
+            30px 20px;
+
+        border-radius:
+            var(--radius-lg, 30px);
+    }
+
+    .vault-title {
+        font-size: 1.7rem;
+    }
+
+    .vault-description {
+        font-size: 0.85rem;
+        line-height: 1.8;
+    }
+
+    .vault-input {
+        min-height: 52px;
+    }
+
+    .vault-submit {
+        width: 100%;
+    }
+
+
+    /* -----------------------------------------------------
+       Hero
+       ----------------------------------------------------- */
+
+    .hero {
+        min-height: 100svh;
+
+        padding:
+            calc(105px + env(safe-area-inset-top))
+            14px
+            74px;
+    }
+
+    .hero-title {
+        font-size:
+            clamp(
+                2.75rem,
+                15vw,
+                4rem
+            );
+    }
+
+    .hero-description {
+        max-width: 340px;
+
+        font-size: 0.9rem;
+        line-height: 1.9;
+    }
+
+    .hero-actions,
+    .hero-buttons {
+        gap: 9px;
+    }
+
+    .btn,
+    .hero-actions button,
+    .hero-buttons button {
+        min-height: 50px;
+        padding-inline: 18px;
+    }
+
+
+    /* -----------------------------------------------------
+       Story
+       ----------------------------------------------------- */
+
+    .story-layout {
+        width:
+            calc(100% - 8px);
+    }
+
+    .story-line {
+        right: 11px;
+    }
+
+    .story-item,
+    .story-row,
+    .story-item:nth-child(even),
+    .story-row:nth-child(even) {
+        padding-right: 34px;
+    }
+
+    .story-dot {
+        right: 11px;
+
+        width: 10px;
+        height: 10px;
+    }
+
+    .story-card {
+        padding:
+            20px 16px;
+
+        border-radius:
+            var(--radius-md, 22px);
+    }
+
+
+    /* -----------------------------------------------------
+       Gallery
+       ----------------------------------------------------- */
+
+    .memory-gallery {
+        grid-auto-rows: 76px;
+        gap: 7px;
+    }
+
+    .memory-overlay {
+        padding: 12px;
+    }
+
+    .memory-overlay p,
+    .memory-overlay span {
+        display: none;
+    }
+
+
+    /* -----------------------------------------------------
+       Counter
+       ----------------------------------------------------- */
+
+    .counter-wrapper,
+    .counter-grid {
+        gap: 7px;
+    }
+
+    .counter-card {
+        padding:
+            18px 6px;
+    }
+
+    .counter-card h3,
+    .stat-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .counter-card span,
+    .stat-card p {
+        font-size: 0.58rem;
+    }
+
+
+    /* -----------------------------------------------------
+       Question
+       ----------------------------------------------------- */
+
+    .question-card {
+        padding:
+            26px 16px;
+
+        border-radius:
+            var(--radius-lg, 30px);
+    }
+
+    .question-actions {
+        min-height: 150px;
+    }
+
+    .answer-button {
+        width: 100%;
+    }
+
+
+    /* -----------------------------------------------------
+       Music
+       ----------------------------------------------------- */
+
+    .music-player {
+        width:
+            calc(100% - 12px);
+
+        right: 6px;
+
+        bottom:
+            calc(6px + env(safe-area-inset-bottom));
+
+        border-radius: 18px;
+    }
+
+    .music-info strong {
+        font-size: 0.7rem;
+    }
+
+    .music-info span {
+        font-size: 0.6rem;
+    }
+
+    .music-control {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    /* -----------------------------------------------------
+       Finale
+       ----------------------------------------------------- */
+
+    .finale {
+        padding:
+            50px 16px
+            calc(50px + env(safe-area-inset-bottom));
+    }
+
+    .finale__heart {
+        font-size:
+            clamp(
+                6rem,
+                28vw,
+                10rem
+            );
+    }
+
+    .finale__message {
+        max-width: 340px;
+
+        font-size: 0.92rem;
+        line-height: 2;
+    }
+}
+
+
+/* =========================================================
+   09. LARGE iPHONE
+   <= 414px
+   ========================================================= */
+
+@media (max-width: 414px) {
+
+    .hero-title {
+        font-size: 3.25rem;
+    }
+
+    .hero-description {
+        font-size: 0.88rem;
+    }
+
+    .opening-title {
+        font-size: 2.7rem;
+    }
+
+    .vault-card {
+        padding:
+            28px 18px;
+    }
+
+    .counter-wrapper {
+        gap: 7px;
+    }
+
+    .counter-card {
+        padding:
+            18px 7px;
+    }
+
+    .counter-card h3,
+    .stat-card h2 {
+        font-size: 1.35rem;
+    }
+
+    .question-card {
+        padding-inline: 18px;
+    }
+
+    .question-actions {
+        min-height: 155px;
+    }
+
+    .answer-button {
+        width: 100%;
+    }
+
+    .memory-gallery {
+        grid-auto-rows: 72px;
+    }
+}
+
+
+/* =========================================================
+   10. COMPACT MOBILE
+   <= 390px
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .hero {
+        padding-inline: 12px;
+    }
+
+    .hero-title {
+        font-size: 3.05rem;
+    }
+
+    .hero-description {
+        font-size: 0.86rem;
+    }
+
+    .opening-title {
+        font-size: 2.55rem;
+    }
+
+    .opening-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .vault-card {
+        padding:
+            26px 16px;
+    }
+
+    .vault-title {
+        font-size: 1.55rem;
+    }
+
+    .counter-wrapper {
+        gap: 6px;
+    }
+
+    .counter-card {
+        padding:
+            18px 6px;
+    }
+
+    .counter-card h3,
+    .stat-card h2 {
+        font-size: 1.22rem;
+    }
+
+    .counter-card span,
+    .stat-card p {
+        font-size: 0.55rem;
+    }
+
+    .question-card {
+        padding-inline: 16px;
+    }
+
+    .question-actions {
+        flex-direction: column;
+        min-height: 165px;
+    }
+
+    .answer-button {
+        width: 100%;
+    }
+
+    .memory-gallery {
+        grid-auto-rows: 68px;
+    }
+
+    .music-player {
+        padding: 8px;
+    }
+
+    .music-art {
+        width: 43px;
+        height: 43px;
+    }
+
+    .music-control {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+
+/* =========================================================
+   11. SMALL MOBILE
+   <= 375px
+   ========================================================= */
+
+@media (max-width: 375px) {
+
+    :root {
+        --container-padding: 12px;
+    }
+
+    .site-nav,
+    .glass-navbar {
+        width:
+            calc(100% - 10px);
+
+        top: 5px;
+
+        padding:
+            6px 8px;
+    }
+
+    .nav-brand span,
+    .glass-navbar .logo span {
+        max-width: 85px;
+        font-size: 0.72rem;
+    }
+
+    .nav-icon-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .hero {
+        padding-top:
+            calc(98px + env(safe-area-inset-top));
+
+        padding-bottom: 68px;
+    }
+
+    .hero-title {
+        font-size: 2.85rem;
+    }
+
+    .hero-description {
+        font-size: 0.83rem;
+        line-height: 1.85;
+    }
+
+    .btn,
+    .hero-actions button,
+    .hero-buttons button {
+        min-height: 48px;
+        font-size: 0.82rem;
+    }
+
+    .chapter-marker {
+        font-size: 0.58rem;
+    }
+
+    .story-card {
+        padding:
+            18px 14px;
+    }
+
+    .story-card h3 {
+        font-size: 1.05rem;
+    }
+
+    .story-card p {
+        font-size: 0.83rem;
+    }
+
+    .memory-gallery {
+        grid-auto-rows: 64px;
+        gap: 6px;
+    }
+
+    .counter-card {
+        padding:
+            16px 4px;
+    }
+
+    .counter-card h3,
+    .stat-card h2 {
+        font-size: 1.1rem;
+    }
+
+    .counter-card span,
+    .stat-card p {
+        font-size: 0.5rem;
+    }
+
+    .letter,
+    .message-card {
+        padding:
+            24px 16px;
+    }
+
+    .letter p,
+    .message-card p {
+        font-size: 0.84rem;
+        line-height: 2.05;
+    }
+
+    .question-card {
+        padding:
+            24px 14px;
+    }
+
+    .question-actions {
+        min-height: 160px;
+    }
+
+    .answer-button {
+        min-height: 48px;
+    }
+
+    .music-player {
+        width:
+            calc(100% - 10px);
+
+        right: 5px;
+
+        bottom:
+            calc(5px + env(safe-area-inset-bottom));
+    }
+
+    .music-info strong {
+        font-size: 0.66rem;
+    }
+
+    .music-info span {
+        font-size: 0.56rem;
+    }
+}
+
+
+/* =========================================================
+   12. LANDSCAPE PHONES
+   ========================================================= */
+
+@media (
+    max-height: 600px
+) and (
+    orientation: landscape
+) {
+
+    .opening {
+        min-height: 100svh;
+        padding: 24px;
+    }
+
+    .opening-title {
+        font-size: 2.4rem;
+    }
+
+    .hero {
+        min-height: 100svh;
+
+        padding:
+            100px
+            24px
+            60px;
+    }
+
+    .hero-scroll {
+        display: none;
+    }
+
+    .vault {
+        padding: 20px;
+
+        overflow-y: auto;
+        max-height: 100svh;
+    }
+
+    .mobile-menu {
+        padding:
+            calc(70px + env(safe-area-inset-top))
+            24px
+            calc(20px + env(safe-area-inset-bottom));
+
+        overflow-y: auto;
+    }
+
+    .mobile-menu ul {
+        gap: 4px;
+    }
+
+    .mobile-menu a {
+        min-height: 46px;
+    }
+}
+
+
+/* =========================================================
+   13. TOUCH DEVICES
+   ========================================================= */
+
+@media (
+    hover: none
+) and (
+    pointer: coarse
+) {
+
+    .cursor-dot,
+    .cursor-outline,
+    .cursor-glow,
+    .ambient-glow {
+        display: none !important;
+    }
+
+
+    /* Disable mouse-oriented hover transforms */
+
+    .memory-item:hover img,
+    .gallery-item:hover img,
+    .reason-card:hover,
+    .story-card:hover,
+    .counter-card:hover,
+    .stat-card:hover {
+        transform: none;
+    }
+
+
+    /* Keep readable overlays visible */
+
+    .memory-overlay {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+
+    /* Avoid sticky hover states */
+
+    .btn:hover,
+    .nav-icon-button:hover,
+    .music-toggle:hover,
+    .mobile-menu-button:hover {
+        transform: none;
+    }
+
+
+    /* Better touch behavior */
+
+    button,
+    a,
+    input,
+    select,
+    textarea {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+
+/* =========================================================
+   14. FINE POINTER / DESKTOP
+   ========================================================= */
+
+@media (
+    hover: hover
+) and (
+    pointer: fine
+) {
+
+    .btn,
+    button,
+    a {
+        touch-action: manipulation;
+    }
+}
+
+
+/* =========================================================
+   15. REDUCED MOTION
+   ========================================================= */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+
+    .cursor-dot,
+    .cursor-outline,
+    .cursor-glow,
+    .ambient-glow,
+    #stars,
+    #aurora,
+    .ambient-canvas {
+        display: none !important;
+    }
+
+    .reveal,
+    html.js-enabled .reveal:not(.is-visible) {
+        opacity: 1 !important;
+
+        transform: none !important;
+
+        filter: none !important;
+    }
+
+    .opening__star,
+    .opening__symbol-core,
+    .opening__symbol::after,
+    .hero__title-heart,
+    .hero-scroll-line,
+    .scroll-cue__line,
+    .header-music__bars i,
+    .floating-music__bars i,
+    .question__heart,
+    .question__symbol,
+    .celebration__heart,
+    .finale__heart,
+    .finale__star {
+        animation: none !important;
+    }
+}
+
+
+/* =========================================================
+   16. HIGH CONTRAST / ACCESSIBILITY
+   ========================================================= */
+
+@media (
+    forced-colors: active
+) {
+
+    .site-nav,
+    .glass-navbar,
+    .mobile-menu,
+    .card,
+    .story-card,
+    .question-card,
+    .letter,
+    .music-player {
+        border:
+            1px solid
+            CanvasText;
+    }
+
+    .btn,
+    button,
+    a {
+        forced-color-adjust: auto;
+    }
+}
+
+
+/* =========================================================
+   17. PRINT
+   ========================================================= */
+
+@media print {
+
+    .site-nav,
+    .glass-navbar,
+    .mobile-menu,
+    .music-player,
+    .back-top,
+    #backTop,
+    .hero-scroll,
+    .cursor-dot,
+    .cursor-outline,
+    .ambient-canvas,
+    #stars,
+    #aurora {
+        display: none !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    section {
+        min-height: auto !important;
+
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .hero,
+    .story-section,
+    .question-section,
+    .finale {
+        min-height: auto !important;
+    }
+}
+
+
+/* =========================================================
+   18. SAFE AREA / MODERN MOBILE BROWSERS
+   ========================================================= */
+
+@supports (padding: env(safe-area-inset-top)) {
+
+    .site-nav,
+    .glass-navbar {
+        margin-top: env(safe-area-inset-top);
+    }
+
+    .mobile-menu {
+        padding-top:
+            calc(
+                90px +
+                env(safe-area-inset-top)
+            );
+
+        padding-bottom:
+            calc(
+                40px +
+                env(safe-area-inset-bottom)
+            );
+    }
+}
+
+
+/* =========================================================
+   19. VERY NARROW DEVICES
+   <= 320px
+   ========================================================= */
+
+@media (max-width: 320px) {
+
+    .hero-title {
+        font-size: 2.65rem;
+    }
+
+    .opening-title {
+        font-size: 2.35rem;
+    }
+
+    .hero-description {
+        font-size: 0.8rem;
+    }
+
+    .nav-brand span,
+    .glass-navbar .logo span {
+        max-width: 70px;
+    }
+
+    .nav-actions {
+        gap: 2px;
+    }
+
+    .nav-icon-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .mobile-menu-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .story-item,
+    .story-row,
+    .story-item:nth-child(even),
+    .story-row:nth-child(even) {
+        padding-right: 30px;
+    }
+
+    .story-line {
+        right: 9px;
+    }
+
+    .story-dot {
+        right: 9px;
+    }
+
+    .counter-card h3,
+    .stat-card h2 {
+        font-size: 1rem;
+    }
+
+    .counter-card span,
+    .stat-card p {
+        font-size: 0.48rem;
+    }
+
+    .question-card {
+        padding-inline: 12px;
+    }
+}
+
+
+/* =========================================================
+   END OF FILE
+   ❤️ إلى غدير ❤️
+   ========================================================= */
