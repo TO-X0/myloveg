@@ -30,7 +30,7 @@ Designed to be elegant, smooth, responsive, and emotionally interactive.
 - Animated love letters (typing effect)
 - Responsive photo gallery
 - Fullscreen lightbox (keyboard + touch support)
-- Live love counter since **2022-01-01**
+- Live love counter since **2020-01-01**
 
 ---
 

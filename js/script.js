@@ -374,10 +374,17 @@ function cacheElements() {
 
 function initializeWebsite() {
 
+    if (window.__loveExperienceInitialized) {
+        return;
+    }
+
     if (LoveExperience.state.initialized) {
         return;
     }
 
+
+    window.__loveExperienceInitialized =
+        true;
 
     LoveExperience.state.initialized =
         true;
@@ -4896,6 +4903,12 @@ function createCelebration() {
 
 function initializeGlobalInteractions() {
 
+    if (window.__loveGlobalInteractionsInitialized) {
+        return;
+    }
+
+    window.__loveGlobalInteractionsInitialized = true;
+
     initializeAudioSource();
 
     initializeSmoothLinks();
@@ -4969,64 +4982,55 @@ function initializeOpeningExperience() {
 
     const opening =
         $(
-            ".opening-experience," +
-            "[data-opening]"
+            "#opening, .opening"
         );
-
-
-    if (!opening) {
-        return;
-    }
-
 
     const startButton =
         $(
-            "[data-start-story]," +
-            ".start-story," +
-            "#startStory",
-            opening
+            "#opening-enter, [data-action='enter-experience']"
         );
 
+    if (!opening || !startButton) {
+        return;
+    }
 
-    if (startButton) {
+    if (window.__loveOpeningExperienceBound) {
+        return;
+    }
 
-        on(
-            startButton,
-            "click",
-            () => {
+    window.__loveOpeningExperienceBound = true;
 
-                opening.classList.add(
-                    "opening-complete"
+    on(
+        startButton,
+        "click",
+        () => {
+
+            opening.classList.add(
+                "opening-complete"
+            );
+
+            const hero =
+                $(
+                    "#home, .hero, [data-hero]"
                 );
 
+            if (hero) {
 
-                const hero =
-                    $(
-                        "#hero," +
-                        ".hero," +
-                        "[data-hero]"
-                    );
+                setTimer(
+                    () => {
 
+                        hero.classList.add(
+                            "hero-entered"
+                        );
 
-                if (hero) {
-
-                    setTimer(
-                        () => {
-
-                            hero.classList.add(
-                                "hero-entered"
-                            );
-
-                        },
-                        250
-                    );
-
-                }
+                    },
+                    250
+                );
 
             }
-        );
 
-    }
+        }
+    );
 
 }
 
