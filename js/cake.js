@@ -125,6 +125,27 @@ function createCakeCandles() {
             `;
 
 
+        const clickHandler = () => {
+
+            if (
+                Cake.completed ||
+                candle.classList.contains("is-extinguished")
+            ) {
+
+                return;
+
+            }
+
+            extinguishCandle(candle);
+
+        };
+
+        candle.addEventListener(
+            "click",
+            clickHandler
+        );
+
+
         const smoke =
             document.createElement("span");
 
@@ -156,6 +177,49 @@ function createCakeCandles() {
    EXTINGUISH NEXT CANDLE
 ========================================================= */
 
+function extinguishCandle(candle) {
+
+    if (
+        !candle ||
+        Cake.completed ||
+        candle.classList.contains("is-extinguished")
+    ) {
+
+        return false;
+
+    }
+
+    candle.classList.add(
+        "is-extinguished"
+    );
+
+    Cake.extinguished++;
+
+    updateCakeCounter();
+
+    createCandleSparkles(candle);
+
+    const status =
+        cakeGet("cake-mic-status");
+
+    if (status && Cake.extinguished < Cake.totalCandles) {
+
+        const remaining =
+            Cake.totalCandles - Cake.extinguished;
+
+        status.textContent =
+            `❤️ بقت ${remaining} شمعة... اضغطي على الشمعة التالية`;
+
+    }
+
+    if (Cake.extinguished >= Cake.totalCandles) {
+        finishCake();
+    }
+
+    return true;
+
+}
+
 function extinguishNextCandle() {
 
     if (
@@ -167,70 +231,12 @@ function extinguishNextCandle() {
 
     }
 
-
     const candle =
         Cake.candles[
             Cake.extinguished
         ];
 
-
-    if (!candle) {
-        return;
-    }
-
-
-    candle.classList.add(
-        "is-extinguished"
-    );
-
-
-    Cake.extinguished++;
-
-
-    updateCakeCounter();
-
-
-    createCandleSparkles(
-        candle
-    );
-
-
-    /*
-     * Update status after each candle.
-     */
-
-    const status =
-        cakeGet("cake-mic-status");
-
-
-    if (
-        status &&
-        Cake.extinguished < Cake.totalCandles
-    ) {
-
-        const remaining =
-            Cake.totalCandles -
-            Cake.extinguished;
-
-
-        status.textContent =
-            `❤️ بقت ${remaining} شمعة... انفخي مرة ثانية`;
-
-    }
-
-
-    /*
-     * All candles are now extinguished.
-     */
-
-    if (
-        Cake.extinguished >=
-        Cake.totalCandles
-    ) {
-
-        finishCake();
-
-    }
+    extinguishCandle(candle);
 
 }
 
@@ -333,185 +339,26 @@ function createCandleSparkles(
 
 async function startCakeMicrophone() {
 
-    if (
-        Cake.microphoneActive
-    ) {
+    const button =
+        cakeGet("cake-mic-button");
 
-        return;
-
+    if (button) {
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.display = "none";
     }
-
-
-    if (
-        Cake.completed
-    ) {
-
-        return;
-
-    }
-
 
     const status =
         cakeGet("cake-mic-status");
 
-
-    const button =
-        cakeGet("cake-mic-button");
-
-
-    if (
-        !navigator.mediaDevices ||
-        !navigator.mediaDevices.getUserMedia
-    ) {
-
-        if (status) {
-
-            status.textContent =
-                "المتصفح لا يدعم استخدام المايكروفون 😔";
-
-        }
-
-        return;
-
+    if (status) {
+        status.textContent =
+            "اضغطي على الشموع نفسها لإطفائها ❤️";
     }
 
+    stopCakeMicrophone();
 
-    try {
-
-        Cake.stream =
-            await navigator.mediaDevices.getUserMedia({
-
-                audio: {
-
-                    echoCancellation: true,
-
-                    noiseSuppression: true,
-
-                    autoGainControl: false
-
-                }
-
-            });
-
-
-        const AudioContextClass =
-            window.AudioContext ||
-            window.webkitAudioContext;
-
-
-        if (!AudioContextClass) {
-
-            throw new Error(
-                "Web Audio API is not supported."
-            );
-
-        }
-
-
-        Cake.audioContext =
-            new AudioContextClass();
-
-
-        /*
-         * Some browsers suspend AudioContext until
-         * it is explicitly resumed after user interaction.
-         */
-
-        if (
-            Cake.audioContext.state ===
-            "suspended"
-        ) {
-
-            await Cake.audioContext.resume();
-
-        }
-
-
-        Cake.analyser =
-            Cake.audioContext.createAnalyser();
-
-
-        Cake.analyser.fftSize =
-            1024;
-
-
-        Cake.analyser.smoothingTimeConstant =
-            0.15;
-
-
-        Cake.microphone =
-            Cake.audioContext.createMediaStreamSource(
-                Cake.stream
-            );
-
-
-        Cake.microphone.connect(
-            Cake.analyser
-        );
-
-
-        /*
-         * Reset detection state.
-         */
-
-        Cake.microphoneActive =
-            true;
-
-        Cake.blowCooldown =
-            false;
-
-        Cake.lastVolume =
-            0;
-
-        Cake.noiseFloor =
-            0;
-
-        Cake.blowStrength =
-            0;
-
-        Cake.blowFrames =
-            0;
-
-
-        if (button) {
-
-            button.classList.add(
-                "is-listening"
-            );
-
-        }
-
-
-        if (status) {
-
-            status.textContent =
-                "🎤 اسمعج... انفخي على الشمعة بلطف ❤️";
-
-        }
-
-
-        monitorCakeBlow();
-
-
-    } catch (error) {
-
-        console.warn(
-            "Microphone permission failed:",
-            error
-        );
-
-
-        stopCakeMicrophone();
-
-
-        if (status) {
-
-            status.textContent =
-                "ما قدرت أوصل للمايكروفون. تأكدي من السماح بالوصول ❤️";
-
-        }
-
-    }
+    return;
 
 }
 
@@ -870,9 +717,33 @@ function finishCake() {
     }
 
 
-    /*
-     * Show the final message.
-     */
+    document.body.classList.add(
+        "cake-finale-active"
+    );
+
+
+    const overlay =
+        document.querySelector(
+            ".cake-finale-overlay"
+        );
+
+    if (!overlay) {
+        const newOverlay =
+            document.createElement("div");
+
+        newOverlay.className =
+            "cake-finale-overlay";
+
+        newOverlay.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.appendChild(
+            newOverlay
+        );
+    }
+
 
     const finale =
         cakeGet("cake-finale");
@@ -880,21 +751,19 @@ function finishCake() {
 
     if (finale) {
 
-        finale.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
+        finale.style.opacity = "1";
+        finale.style.visibility = "visible";
+        finale.style.transform = "scale(1)";
+        finale.style.pointerEvents = "auto";
 
         finale.classList.add(
             "is-visible"
         );
 
-
-        /*
-         * Make sure the final message receives focus
-         * when possible without changing the page.
-         */
+        finale.setAttribute(
+            "aria-hidden",
+            "false"
+        );
 
         if (
             typeof finale.focus ===
@@ -906,14 +775,11 @@ function finishCake() {
                 "-1"
             );
 
+            finale.focus();
         }
 
     }
 
-
-    /*
-     * Small final celebration.
-     */
 
     createFinalCakeParticles();
 
@@ -1235,12 +1101,28 @@ function resetCake() {
             "is-visible"
         );
 
+        finale.style.opacity = "0";
+        finale.style.visibility = "hidden";
 
         finale.setAttribute(
             "aria-hidden",
             "true"
         );
 
+    }
+
+
+    document.body.classList.remove(
+        "cake-finale-active"
+    );
+
+    const overlay =
+        document.querySelector(
+            ".cake-finale-overlay"
+        );
+
+    if (overlay) {
+        overlay.remove();
     }
 
 
@@ -1251,7 +1133,7 @@ function resetCake() {
     if (status) {
 
         status.textContent =
-            "🎂 جاهزة؟ اضغطي على الميكروفون وانفخي ❤️";
+            "🎂 اضغطي على أي شمعة لإطفائها ❤️";
 
     }
 
@@ -1299,14 +1181,28 @@ function initCake() {
 
     if (button) {
 
-        button.addEventListener(
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.display = "none";
+
+        button.removeEventListener(
             "click",
-            startCakeMicrophone,
-            {
-                passive: true
-            }
+            startCakeMicrophone
         );
 
+        button.setAttribute(
+            "aria-label",
+            "إطفاء الشموع بالنقر"
+        );
+
+    }
+
+    const status =
+        cakeGet("cake-mic-status");
+
+    if (status) {
+        status.textContent =
+            "اضغطي على أي شمعة للإطفاء ❤️";
     }
 
 
