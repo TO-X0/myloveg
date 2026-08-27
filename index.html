@@ -62,6 +62,12 @@
         rel="stylesheet"
         href="css/responsive.css"
     >
+
+    <!-- Preload the small local media files so the first mobile interaction is instant. -->
+    <link rel="preload" as="image" href="images/p1.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="images/p2.jpg">
+    <link rel="preload" as="image" href="images/p3.jpg">
+    <link rel="preload" as="image" href="images/p4.jpg">
 </head>
 
 <body>
@@ -1213,7 +1219,8 @@
                             <img
                                 src="images/p1.jpg"
                                 alt="ذكرى جميلة من قصتنا"
-                                loading="lazy"
+                                loading="eager"
+                                fetchpriority="high"
                                 decoding="async"
                             >
 
@@ -1272,7 +1279,7 @@
                                 <img
                                     src="images/p2.jpg"
                                     alt="ذكرى جميلة من قصتنا"
-                                    loading="lazy"
+                                    loading="eager"
                                     decoding="async"
                                 >
 
@@ -1322,7 +1329,7 @@
                                 <img
                                     src="images/p3.jpg"
                                     alt="ذكرى جميلة من قصتنا"
-                                    loading="lazy"
+                                    loading="eager"
                                     decoding="async"
                                 >
 
@@ -1372,7 +1379,7 @@
                                 <img
                                     src="images/p4.jpg"
                                     alt="ذكرى جميلة من قصتنا"
-                                    loading="lazy"
+                                    loading="eager"
                                     decoding="async"
                                 >
 
@@ -1726,7 +1733,7 @@
 
                                 <audio
                                     id="bgMusic"
-                                    preload="none"
+                                    preload="auto"
                                 >
 
                                     <source
@@ -2251,7 +2258,7 @@
         <p>
             عندي أمنية صغيرة إلك...
             <br>
-            انفخي على الشموع وخلي أمنيتج تتحقق 🥹❤️
+            المسّي الشموع واحدة واحدة وخلي أمنيتج تتحقق 🥹❤️
         </p>
 
     </div>
@@ -2315,6 +2322,10 @@
 
         </div>
 
+    </div>
+
+    <div class="cake-touch-hint" role="status">
+        المسّي كل شمعة لإطفائها ❤️
     </div>
 
 

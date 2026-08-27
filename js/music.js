@@ -996,7 +996,11 @@ function waitForAudioReady(){
         audio.addEventListener("canplay", onReady, {once: true});
         audio.addEventListener("loadedmetadata", onReady, {once: true});
         audio.addEventListener("error", onError, {once: true});
-        audio.load();
+        // Do not restart a preload already in progress; on mobile this
+        // otherwise aborts the current request and creates a visible delay.
+        if (audio.networkState === 0) {
+            audio.load();
+        }
 
     });
 
@@ -2028,6 +2032,12 @@ function configureAudio(){
 
     Music.audio.preload =
         "auto";
+
+    // Start fetching the local track before the user reaches the player.
+    // Mobile browsers still require the eventual play() call to come from a gesture.
+    if (Music.audio.readyState === 0) {
+        Music.audio.load();
+    }
 
 
     Music.audio.volume =

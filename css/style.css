@@ -5777,6 +5777,12 @@ html.js-enabled .reveal.is-visible {
 
     flex: 0 0 20px;
 
+    padding: 0;
+    border: 1px solid rgba(255,255,255,.22);
+    cursor: pointer;
+    appearance: none;
+    touch-action: manipulation;
+
     border-radius:
         9px 9px 5px 5px;
 
@@ -5786,10 +5792,6 @@ html.js-enabled .reveal.is-visible {
             #ffd0dc 0 9px,
             #ed6a91 9px 16px
         );
-
-    border:
-        1px solid
-        rgba(255,255,255,.22);
 
     box-shadow:
         inset 3px 0 5px
@@ -5935,124 +5937,12 @@ html.js-enabled .reveal.is-visible {
 }
 
 
-/* =========================================================
-   MICROPHONE BUTTON
-========================================================= */
-
-.cake-mic-button {
-    width: 180px;
-    height: 62px;
-
-    border: 0;
-    border-radius: 999px;
-
-    cursor: pointer;
-
-    color: #fff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff5b99,
-            #c52d69
-        );
-
-    box-shadow:
-        0 10px 30px
-        rgba(255,50,130,.28),
-
-        inset 0 1px 1px
-        rgba(255,255,255,.22);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-
-.cake-mic-button:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 15px 40px
-        rgba(255,50,130,.45);
-}
-
-.cake-mic-button:active {
-    transform: scale(.96);
-}
-
-.cake-mic-button.is-listening {
-    animation:
-        micPulse
-        1.5s ease-in-out infinite;
-}
-
-.cake-mic-icon {
-    font-size: 22px;
-    margin-right: 8px;
-}
-
-.cake-mic-text {
-    font-size: 1rem;
-}
-
-.cake-mic-status {
+.cake-touch-hint {
     margin-top: 14px;
-
     color:
         rgba(255,255,255,.65);
-
     text-align: center;
-}
-
-
-/* =========================================================
-   VOLUME
-========================================================= */
-
-.cake-volume {
-    margin-top: 13px;
-
-    width: 250px;
-
-    text-align: center;
-
-    color:
-        rgba(255,255,255,.42);
-
-    font-size: .78rem;
-}
-
-.cake-volume-bar {
-    height: 6px;
-
-    margin-bottom: 7px;
-
-    overflow: hidden;
-
-    border-radius: 999px;
-
-    background:
-        rgba(255,255,255,.07);
-}
-
-.cake-volume-bar span {
-    display: block;
-
-    width: 0;
-    height: 100%;
-
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff4c8b,
-            #ffb6d0
-        );
-
-    transition:
-        width .08s linear;
+    font-size: 1rem;
 }
 
 
@@ -6116,6 +6006,9 @@ body.cake-finale-active .cake-finale-overlay {
         opacity .8s ease,
         visibility .8s ease,
         transform .8s ease;
+
+    /* Keep the final message above transformed sections on mobile browsers. */
+    isolation: isolate;
 }
 
 .cake-finale.is-visible {
@@ -6306,22 +6199,6 @@ body.cake-finale-active .cake-finale-overlay {
 
 }
 
-@keyframes micPulse {
-
-    0%, 100% {
-        box-shadow:
-            0 0 25px
-            rgba(255,60,140,.25);
-    }
-
-    50% {
-        box-shadow:
-            0 0 50px
-            rgba(255,60,140,.65);
-    }
-
-}
-
 @keyframes cakeSparkle {
 
     0% {
@@ -6454,10 +6331,6 @@ body.cake-finale-active .cake-finale-overlay {
         height: 38px;
     }
 
-    .cake-volume {
-        width: 220px;
-    }
-
     .cake-finale {
         padding: 20px;
     }
@@ -6490,11 +6363,8 @@ body.cake-finale-active .cake-finale-overlay {
 
     .cake-background span,
     .cake-flame,
-    .cake-mic-button,
     .cake-finale-heart {
         animation: none !important;
     }
 
 }
-
-
