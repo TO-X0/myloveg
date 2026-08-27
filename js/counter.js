@@ -373,6 +373,11 @@ function removeMotionPreference() {
  */
 function getStartDate() {
 
+    const startAttribute =
+        typeof document !== "undefined"
+            ? document.querySelector("[data-counter-start]")?.dataset.counterStart
+            : "";
+
     const configuredDate =
 
         Counter.config &&
@@ -382,6 +387,7 @@ function getStartDate() {
 
     const date =
         new Date(
+            startAttribute ||
             configuredDate ||
             COUNTER_FALLBACK_DATE
         );
@@ -1267,6 +1273,10 @@ function removeVisibilityListener() {
  */
 async function initCounter() {
 
+    if (window.__loveCounterInitialized) {
+        return Counter.lastValues;
+    }
+
     /*
      * Prevent duplicate initialization.
      */
@@ -1338,6 +1348,9 @@ async function initCounter() {
 
 
         Counter.initialized =
+            true;
+
+        window.__loveCounterInitialized =
             true;
 
 

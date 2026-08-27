@@ -150,7 +150,7 @@ export const CONFIG = Object.freeze({
             true,
 
         preload:
-            "metadata",
+            "auto",
 
         rememberVolume:
             true,
