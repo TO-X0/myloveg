@@ -502,6 +502,16 @@ function initializePasswordVault() {
 
     if (!screen || !input || !button) {
         LoveExperience.state.unlocked = true;
+
+        const website =
+            document.getElementById("website");
+
+        if (website) {
+            website.classList.add("is-visible");
+            website.setAttribute("aria-hidden", "false");
+        }
+
+        document.body.classList.remove("no-scroll");
         return;
     }
 
@@ -4990,11 +5000,20 @@ function initializeOpeningExperience() {
             "#opening-enter, [data-action='enter-experience']"
         );
 
+    const passwordScreen =
+        $(
+            "#password-screen, [data-password-screen]"
+        );
+
     if (!opening || !startButton) {
         return;
     }
 
-    if (window.__loveOpeningExperienceBound) {
+    if (
+        passwordScreen ||
+        typeof window.initPassword === "function" ||
+        window.__loveOpeningExperienceBound
+    ) {
         return;
     }
 

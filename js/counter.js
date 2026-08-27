@@ -19,7 +19,7 @@
     CONSTANTS
 =========================================================*/
 
-const COUNTER_FALLBACK_DATE = "2020-01-01T00:00:00";
+const COUNTER_FALLBACK_DATE = "2021-06-21T00:00:00";
 
 const TIME = Object.freeze({
 
@@ -1001,6 +1001,17 @@ function updateCounter() {
         duration.months,
         Boolean(previous)
     );
+
+
+    if (
+        Counter.elements.months &&
+        !Counter.elements.months.dataset.value
+    ) {
+        Counter.elements.months.dataset.value =
+            formatValue(duration.months);
+        Counter.elements.months.textContent =
+            formatValue(duration.months);
+    }
 
 
     renderValue(

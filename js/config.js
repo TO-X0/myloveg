@@ -84,9 +84,9 @@ export const CONFIG = Object.freeze({
 
     story: Object.freeze({
 
-        startYear: 2020,
+        startYear: 2021,
 
-        startDate: "2020-01-01T00:00:00",
+        startDate: "2021-06-21T00:00:00",
 
         dateFormat: "yyyy-MM-dd",
 
@@ -102,7 +102,7 @@ export const CONFIG = Object.freeze({
     counter: Object.freeze({
 
         startDate:
-            "2020-01-01T00:00:00",
+            "2021-06-21T00:00:00",
 
         updateInterval:
             1000,

@@ -1,9 +1,15 @@
+
 "use strict";
 
 /* =========================================================
    CAKE.JS
    Interactive Birthday Cake
-   Microphone Blow Detection
+   3 Candles + Improved Microphone Blow Detection
+========================================================= */
+
+
+/* =========================================================
+   STATE
 ========================================================= */
 
 const Cake = {
@@ -26,13 +32,17 @@ const Cake = {
 
     extinguished: 0,
 
-    totalCandles: 12,
+    totalCandles: 3,
 
     blowCooldown: false,
 
     lastVolume: 0,
 
-    calibration: 0,
+    noiseFloor: 0,
+
+    blowStrength: 0,
+
+    blowFrames: 0,
 
     completed: false
 
@@ -43,7 +53,7 @@ const Cake = {
    ELEMENTS
 ========================================================= */
 
-function cakeGet(id){
+function cakeGet(id) {
 
     return document.getElementById(id);
 
@@ -54,24 +64,34 @@ function cakeGet(id){
    CREATE CANDLES
 ========================================================= */
 
-function createCakeCandles(){
+function createCakeCandles() {
 
     const container =
         cakeGet("cake-candles");
 
-    if(!container){
+    if (!container) {
         return;
     }
+
 
     container.replaceChildren();
 
     Cake.candles = [];
 
-    for(
+
+    /*
+     * Three candles:
+     *
+     * 0 = left
+     * 1 = center
+     * 2 = right
+     */
+
+    for (
         let i = 0;
         i < Cake.totalCandles;
         i++
-    ){
+    ) {
 
         const candle =
             document.createElement("div");
@@ -83,11 +103,21 @@ function createCakeCandles(){
             String(i);
 
 
+        /*
+         * Give each candle its own position.
+         */
+
+        candle.classList.add(
+            `cake-candle-${i + 1}`
+        );
+
+
         const flame =
             document.createElement("span");
 
         flame.className =
             "cake-flame";
+
 
         flame.innerHTML =
             `
@@ -113,7 +143,9 @@ function createCakeCandles(){
         );
 
 
-        Cake.candles.push(candle);
+        Cake.candles.push(
+            candle
+        );
 
     }
 
@@ -121,15 +153,15 @@ function createCakeCandles(){
 
 
 /* =========================================================
-   EXTINGUISH CANDLE
+   EXTINGUISH NEXT CANDLE
 ========================================================= */
 
-function extinguishNextCandle(){
+function extinguishNextCandle() {
 
-    if(
+    if (
         Cake.completed ||
         Cake.extinguished >= Cake.totalCandles
-    ){
+    ) {
 
         return;
 
@@ -142,7 +174,7 @@ function extinguishNextCandle(){
         ];
 
 
-    if(!candle){
+    if (!candle) {
         return;
     }
 
@@ -163,10 +195,38 @@ function extinguishNextCandle(){
     );
 
 
-    if(
+    /*
+     * Update status after each candle.
+     */
+
+    const status =
+        cakeGet("cake-mic-status");
+
+
+    if (
+        status &&
+        Cake.extinguished < Cake.totalCandles
+    ) {
+
+        const remaining =
+            Cake.totalCandles -
+            Cake.extinguished;
+
+
+        status.textContent =
+            `❤️ بقت ${remaining} شمعة... انفخي مرة ثانية`;
+
+    }
+
+
+    /*
+     * All candles are now extinguished.
+     */
+
+    if (
         Cake.extinguished >=
         Cake.totalCandles
-    ){
+    ) {
 
         finishCake();
 
@@ -179,12 +239,13 @@ function extinguishNextCandle(){
    COUNTER
 ========================================================= */
 
-function updateCakeCounter(){
+function updateCakeCounter() {
 
     const counter =
         cakeGet("cake-counter");
 
-    if(!counter){
+
+    if (!counter) {
         return;
     }
 
@@ -196,28 +257,30 @@ function updateCakeCounter(){
 
 
 /* =========================================================
-   SPARKLES
+   CANDLE SPARKLES
 ========================================================= */
 
 function createCandleSparkles(
     candle
-){
+) {
 
     const rect =
         candle.getBoundingClientRect();
 
 
-    for(
+    for (
         let i = 0;
-        i < 8;
+        i < 6;
         i++
-    ){
+    ) {
 
         const particle =
             document.createElement("span");
 
+
         particle.className =
             "cake-sparkle";
+
 
         particle.textContent =
             i % 2 === 0
@@ -228,18 +291,20 @@ function createCandleSparkles(
         particle.style.left =
             `${rect.left + rect.width / 2}px`;
 
+
         particle.style.top =
             `${rect.top}px`;
 
 
         particle.style.setProperty(
             "--spark-x",
-            `${(Math.random() - .5) * 100}px`
+            `${(Math.random() - 0.5) * 70}px`
         );
+
 
         particle.style.setProperty(
             "--spark-y",
-            `${-30 - Math.random() * 80}px`
+            `${-25 - Math.random() * 60}px`
         );
 
 
@@ -248,8 +313,12 @@ function createCandleSparkles(
         );
 
 
-        setTimeout(
-            () => particle.remove(),
+        window.setTimeout(
+            () => {
+
+                particle.remove();
+
+            },
             1000
         );
 
@@ -262,11 +331,20 @@ function createCandleSparkles(
    MICROPHONE
 ========================================================= */
 
-async function startCakeMicrophone(){
+async function startCakeMicrophone() {
 
-    if(
+    if (
         Cake.microphoneActive
-    ){
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        Cake.completed
+    ) {
 
         return;
 
@@ -276,16 +354,17 @@ async function startCakeMicrophone(){
     const status =
         cakeGet("cake-mic-status");
 
+
     const button =
         cakeGet("cake-mic-button");
 
 
-    if(
+    if (
         !navigator.mediaDevices ||
         !navigator.mediaDevices.getUserMedia
-    ){
+    ) {
 
-        if(status){
+        if (status) {
 
             status.textContent =
                 "المتصفح لا يدعم استخدام المايكروفون 😔";
@@ -297,7 +376,7 @@ async function startCakeMicrophone(){
     }
 
 
-    try{
+    try {
 
         Cake.stream =
             await navigator.mediaDevices.getUserMedia({
@@ -315,11 +394,37 @@ async function startCakeMicrophone(){
             });
 
 
+        const AudioContextClass =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+        if (!AudioContextClass) {
+
+            throw new Error(
+                "Web Audio API is not supported."
+            );
+
+        }
+
+
         Cake.audioContext =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
+            new AudioContextClass();
+
+
+        /*
+         * Some browsers suspend AudioContext until
+         * it is explicitly resumed after user interaction.
+         */
+
+        if (
+            Cake.audioContext.state ===
+            "suspended"
+        ) {
+
+            await Cake.audioContext.resume();
+
+        }
 
 
         Cake.analyser =
@@ -331,7 +436,7 @@ async function startCakeMicrophone(){
 
 
         Cake.analyser.smoothingTimeConstant =
-            0.25;
+            0.15;
 
 
         Cake.microphone =
@@ -345,10 +450,30 @@ async function startCakeMicrophone(){
         );
 
 
+        /*
+         * Reset detection state.
+         */
+
         Cake.microphoneActive =
             true;
 
-        if(button){
+        Cake.blowCooldown =
+            false;
+
+        Cake.lastVolume =
+            0;
+
+        Cake.noiseFloor =
+            0;
+
+        Cake.blowStrength =
+            0;
+
+        Cake.blowFrames =
+            0;
+
+
+        if (button) {
 
             button.classList.add(
                 "is-listening"
@@ -357,10 +482,10 @@ async function startCakeMicrophone(){
         }
 
 
-        if(status){
+        if (status) {
 
             status.textContent =
-                "🎤 اسمعج... انفخي على الشموع بلطف ❤️";
+                "🎤 اسمعج... انفخي على الشمعة بلطف ❤️";
 
         }
 
@@ -368,7 +493,7 @@ async function startCakeMicrophone(){
         monitorCakeBlow();
 
 
-    }catch(error){
+    } catch (error) {
 
         console.warn(
             "Microphone permission failed:",
@@ -376,7 +501,10 @@ async function startCakeMicrophone(){
         );
 
 
-        if(status){
+        stopCakeMicrophone();
+
+
+        if (status) {
 
             status.textContent =
                 "ما قدرت أوصل للمايكروفون. تأكدي من السماح بالوصول ❤️";
@@ -389,17 +517,32 @@ async function startCakeMicrophone(){
 
 
 /* =========================================================
-   MONITOR BLOW
+   BLOW DETECTION
 ========================================================= */
 
-function monitorCakeBlow(){
+function monitorCakeBlow() {
 
-    if(
+    if (
         !Cake.microphoneActive ||
         !Cake.analyser
-    ){
+    ) {
 
         return;
+
+    }
+
+
+    /*
+     * Cancel an old animation loop first.
+     */
+
+    if (
+        Cake.animationFrame
+    ) {
+
+        cancelAnimationFrame(
+            Cake.animationFrame
+        );
 
     }
 
@@ -410,11 +553,12 @@ function monitorCakeBlow(){
         );
 
 
-    function analyze(){
+    function analyze() {
 
-        if(
-            !Cake.microphoneActive
-        ){
+        if (
+            !Cake.microphoneActive ||
+            !Cake.analyser
+        ) {
 
             return;
 
@@ -426,19 +570,22 @@ function monitorCakeBlow(){
         );
 
 
+        /*
+         * Calculate RMS volume.
+         */
+
         let sum = 0;
 
 
-        for(
+        for (
             let i = 0;
             i < buffer.length;
             i++
-        ){
+        ) {
 
             const value =
                 (
-                    buffer[i] -
-                    128
+                    buffer[i] - 128
                 ) / 128;
 
 
@@ -455,14 +602,25 @@ function monitorCakeBlow(){
 
 
         /*
-         * Convert to readable percentage.
+         * Convert RMS to a readable 0..1 range.
          */
 
         const volume =
             Math.min(
                 1,
-                rms * 4
+                rms * 4.5
             );
+
+
+        /*
+         * Keep the previous volume BEFORE
+         * changing lastVolume.
+         *
+         * This fixes the original logical bug.
+         */
+
+        const previousVolume =
+            Cake.lastVolume;
 
 
         Cake.lastVolume =
@@ -475,38 +633,114 @@ function monitorCakeBlow(){
 
 
         /*
-         * Blow detection.
+         * Slowly learn the ambient noise level.
          *
-         * Normal speaking:
-         * approximately low/moderate RMS.
-         *
-         * A close microphone blow:
-         * produces a sudden strong signal.
+         * This helps prevent normal background noise
+         * from extinguishing candles.
          */
 
-        const blowThreshold =
-            0.22;
+        if (
+            !Cake.blowCooldown &&
+            Cake.blowFrames === 0
+        ) {
 
-
-        const suddenIncrease =
-            volume >
-            Cake.lastVolume + 0.08;
-
-
-        if(
-            volume >
-            blowThreshold &&
-            !Cake.blowCooldown
-        ){
-
-            detectCakeBlow();
+            Cake.noiseFloor =
+                Cake.noiseFloor * 0.96 +
+                volume * 0.04;
 
         }
 
 
-        requestAnimationFrame(
-            analyze
-        );
+        /*
+         * Detect a sudden increase in sound.
+         */
+
+        const suddenIncrease =
+            volume >
+            previousVolume + 0.035;
+
+
+        /*
+         * A blow should be noticeably stronger than
+         * the surrounding microphone noise.
+         */
+
+        const aboveNoise =
+            volume >
+            Math.max(
+                0.18,
+                Cake.noiseFloor * 2.2
+            );
+
+
+        /*
+         * Main blow condition.
+         *
+         * We do not extinguish immediately.
+         * The signal must remain strong for a few
+         * consecutive animation frames.
+         */
+
+        const strongBlow =
+            volume > 0.28 &&
+            aboveNoise &&
+            suddenIncrease;
+
+
+        /*
+         * Also allow a sustained strong blow even if
+         * the first frame was missed.
+         */
+
+        const sustainedBlow =
+            volume > 0.34 &&
+            aboveNoise;
+
+
+        if (
+            !Cake.blowCooldown &&
+            (
+                strongBlow ||
+                sustainedBlow
+            )
+        ) {
+
+            Cake.blowFrames++;
+
+        } else if (
+            Cake.blowFrames > 0
+        ) {
+
+            Cake.blowFrames =
+                Math.max(
+                    0,
+                    Cake.blowFrames - 1
+                );
+
+        }
+
+
+        /*
+         * Require several consecutive frames.
+         */
+
+        if (
+            Cake.blowFrames >= 3 &&
+            !Cake.blowCooldown
+        ) {
+
+            detectCakeBlow();
+
+            Cake.blowFrames =
+                0;
+
+        }
+
+
+        Cake.animationFrame =
+            requestAnimationFrame(
+                analyze
+            );
 
     }
 
@@ -520,12 +754,12 @@ function monitorCakeBlow(){
    BLOW DETECTED
 ========================================================= */
 
-function detectCakeBlow(){
+function detectCakeBlow() {
 
-    if(
+    if (
         Cake.blowCooldown ||
         Cake.completed
-    ){
+    ) {
 
         return;
 
@@ -536,22 +770,31 @@ function detectCakeBlow(){
         true;
 
 
+    /*
+     * One blow = one candle.
+     */
+
     extinguishNextCandle();
 
 
     /*
-     * Prevent multiple candles from
-     * disappearing from one long blow.
+     * Wait before accepting another blow.
+     *
+     * This prevents one long blow from turning off
+     * multiple candles.
      */
 
-    setTimeout(
+    window.setTimeout(
         () => {
 
             Cake.blowCooldown =
                 false;
 
+            Cake.blowFrames =
+                0;
+
         },
-        750
+        900
     );
 
 }
@@ -563,12 +806,13 @@ function detectCakeBlow(){
 
 function updateCakeVolume(
     volume
-){
+) {
 
     const bar =
         cakeGet("cake-volume-bar");
 
-    if(!bar){
+
+    if (!bar) {
         return;
     }
 
@@ -576,7 +820,8 @@ function updateCakeVolume(
     const fill =
         bar.querySelector("span");
 
-    if(!fill){
+
+    if (!fill) {
         return;
     }
 
@@ -588,32 +833,52 @@ function updateCakeVolume(
 
 
 /* =========================================================
-   FINISH
+   FINISH CAKE
 ========================================================= */
 
-function finishCake(){
+function finishCake() {
+
+    if (
+        Cake.completed
+    ) {
+
+        return;
+
+    }
+
 
     Cake.completed =
         true;
+
+
+    /*
+     * Stop microphone analysis first.
+     */
+
+    stopCakeMicrophone();
 
 
     const status =
         cakeGet("cake-mic-status");
 
 
-    if(status){
+    if (status) {
 
         status.textContent =
-            "🥹❤️ أمنيتج تحققت...";
+            "🥹❤️ نطفت كل الشموع... أتمنى تتحقق أمنيتج ❤️";
 
     }
 
+
+    /*
+     * Show the final message.
+     */
 
     const finale =
         cakeGet("cake-finale");
 
 
-    if(finale){
+    if (finale) {
 
         finale.setAttribute(
             "aria-hidden",
@@ -625,13 +890,32 @@ function finishCake(){
             "is-visible"
         );
 
+
+        /*
+         * Make sure the final message receives focus
+         * when possible without changing the page.
+         */
+
+        if (
+            typeof finale.focus ===
+            "function"
+        ) {
+
+            finale.setAttribute(
+                "tabindex",
+                "-1"
+            );
+
+        }
+
     }
 
 
+    /*
+     * Small final celebration.
+     */
+
     createFinalCakeParticles();
-
-
-    stopCakeMicrophone();
 
 }
 
@@ -640,15 +924,24 @@ function finishCake(){
    FINAL PARTICLES
 ========================================================= */
 
-function createFinalCakeParticles(){
+function createFinalCakeParticles() {
 
-    for(
+    /*
+     * Keep this celebration intentionally light.
+     * It should not cover the entire website.
+     */
+
+    const particleCount =
+        18;
+
+
+    for (
         let i = 0;
-        i < 40;
+        i < particleCount;
         i++
-    ){
+    ) {
 
-        setTimeout(
+        window.setTimeout(
             () => {
 
                 const particle =
@@ -681,7 +974,7 @@ function createFinalCakeParticles(){
 
                 particle.style.setProperty(
                     "--rise-x",
-                    `${(Math.random() - .5) * 200}px`
+                    `${(Math.random() - 0.5) * 160}px`
                 );
 
 
@@ -690,13 +983,17 @@ function createFinalCakeParticles(){
                 );
 
 
-                setTimeout(
-                    () => particle.remove(),
+                window.setTimeout(
+                    () => {
+
+                        particle.remove();
+
+                    },
                     4000
                 );
 
             },
-            i * 70
+            i * 90
         );
 
     }
@@ -708,35 +1005,255 @@ function createFinalCakeParticles(){
    STOP MICROPHONE
 ========================================================= */
 
-function stopCakeMicrophone(){
+function stopCakeMicrophone() {
 
     Cake.microphoneActive =
         false;
 
 
-    if(Cake.stream){
+    /*
+     * Stop animation loop.
+     */
+
+    if (
+        Cake.animationFrame
+    ) {
+
+        cancelAnimationFrame(
+            Cake.animationFrame
+        );
+
+
+        Cake.animationFrame =
+            null;
+
+    }
+
+
+    /*
+     * Remove microphone stream.
+     */
+
+    if (
+        Cake.stream
+    ) {
 
         Cake.stream
             .getTracks()
             .forEach(
-                track => track.stop()
+                track => {
+
+                    try {
+
+                        track.stop();
+
+                    } catch {
+
+                        /*
+                         * Ignore track cleanup errors.
+                         */
+
+                    }
+
+                }
             );
 
     }
 
 
-    if(Cake.audioContext){
+    /*
+     * Disconnect audio nodes.
+     */
 
-        Cake.audioContext.close()
-            .catch(
-                () => {}
-            );
+    if (
+        Cake.microphone
+    ) {
+
+        try {
+
+            Cake.microphone.disconnect();
+
+        } catch {
+
+            /*
+             * Ignore disconnect errors.
+             */
+
+        }
+
+    }
+
+
+    if (
+        Cake.analyser
+    ) {
+
+        try {
+
+            Cake.analyser.disconnect();
+
+        } catch {
+
+            /*
+             * Ignore disconnect errors.
+
+             */
+
+        }
+
+    }
+
+
+    /*
+     * Close AudioContext.
+     */
+
+    if (
+        Cake.audioContext
+    ) {
+
+        try {
+
+            const closingContext =
+                Cake.audioContext.close();
+
+
+            if (
+                closingContext &&
+                typeof closingContext.catch ===
+                "function"
+            ) {
+
+                closingContext.catch(
+                    () => {}
+                );
+
+            }
+
+        } catch {
+
+            /*
+             * Ignore AudioContext cleanup errors.
+             */
+
+        }
 
     }
 
 
     Cake.stream =
         null;
+
+    Cake.microphone =
+        null;
+
+    Cake.analyser =
+        null;
+
+    Cake.audioContext =
+        null;
+
+
+    Cake.blowFrames =
+        0;
+
+    Cake.blowCooldown =
+        false;
+
+
+    const button =
+        cakeGet("cake-mic-button");
+
+
+    if (button) {
+
+        button.classList.remove(
+            "is-listening"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+/*
+ * Optional helper for testing.
+ *
+ * This lets you reset the cake without refreshing
+ * the entire page.
+ */
+
+function resetCake() {
+
+    stopCakeMicrophone();
+
+
+    Cake.extinguished =
+        0;
+
+
+    Cake.blowCooldown =
+        false;
+
+
+    Cake.lastVolume =
+        0;
+
+
+    Cake.noiseFloor =
+        0;
+
+
+    Cake.blowStrength =
+        0;
+
+
+    Cake.blowFrames =
+        0;
+
+
+    Cake.completed =
+        false;
+
+
+    createCakeCandles();
+
+    updateCakeCounter();
+
+
+    const finale =
+        cakeGet("cake-finale");
+
+
+    if (finale) {
+
+        finale.classList.remove(
+            "is-visible"
+        );
+
+
+        finale.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    const status =
+        cakeGet("cake-mic-status");
+
+
+    if (status) {
+
+        status.textContent =
+            "🎂 جاهزة؟ اضغطي على الميكروفون وانفخي ❤️";
+
+    }
 
 }
 
@@ -745,11 +1262,26 @@ function stopCakeMicrophone(){
    INIT
 ========================================================= */
 
-function initCake(){
+function initCake() {
 
-    if(
+    if (
         Cake.initialized
-    ){
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * Only initialize when the cake exists.
+     */
+
+    const container =
+        cakeGet("cake-candles");
+
+
+    if (!container) {
 
         return;
 
@@ -765,11 +1297,14 @@ function initCake(){
         cakeGet("cake-mic-button");
 
 
-    if(button){
+    if (button) {
 
         button.addEventListener(
             "click",
-            startCakeMicrophone
+            startCakeMicrophone,
+            {
+                passive: true
+            }
         );
 
     }
@@ -788,20 +1323,27 @@ function initCake(){
 window.initCake =
     initCake;
 
+
 window.startCakeMicrophone =
     startCakeMicrophone;
 
+
 window.stopCakeMicrophone =
     stopCakeMicrophone;
+
+
+window.resetCake =
+    resetCake;
 
 
 /* =========================================================
    AUTO INIT
 ========================================================= */
 
-if(
-    document.readyState === "loading"
-){
+if (
+    document.readyState ===
+    "loading"
+) {
 
     document.addEventListener(
         "DOMContentLoaded",
@@ -811,8 +1353,13 @@ if(
         }
     );
 
-}else{
+} else {
 
     initCake();
 
 }
+
+
+/* =========================================================
+   END OF CAKE.JS
+========================================================= */
