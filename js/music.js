@@ -801,6 +801,20 @@ function fadeVolume(
     }
 
 
+    if(
+        Music.fadeTimer
+    ){
+
+        clearInterval(
+            Music.fadeTimer
+        );
+
+        Music.fadeTimer =
+            null;
+
+    }
+
+
     Music.fading =
         true;
 
@@ -1430,14 +1444,62 @@ function updateMusicUI(){
         Music.playBtn
     ){
 
-        Music.playBtn.hidden =
-            playing;
+        if(
+            Music.pauseBtn
+        ){
 
+            Music.playBtn.hidden =
+                playing;
 
-        Music.playBtn.setAttribute(
-            "aria-label",
-            "Play music"
-        );
+            Music.playBtn.setAttribute(
+                "aria-label",
+                "Play music"
+            );
+
+        }else{
+
+            Music.playBtn.hidden =
+                false;
+
+            Music.playBtn.classList.toggle(
+                "is-playing",
+                playing
+            );
+
+            Music.playBtn.setAttribute(
+                "aria-pressed",
+                String(
+                    playing
+                )
+            );
+
+            Music.playBtn.setAttribute(
+                "aria-label",
+                playing
+                    ? "إيقاف الموسيقى"
+                    : "تشغيل الموسيقى"
+            );
+
+            const icon =
+                Music.playBtn.querySelector(
+                    ".music-player__play-icon"
+                ) ||
+                Music.playBtn.querySelector(
+                    "span"
+                );
+
+            if(
+                icon
+            ){
+
+                icon.textContent =
+                    playing
+                        ? "❚❚"
+                        : "▶";
+
+            }
+
+        }
 
     }
 
@@ -1479,8 +1541,8 @@ function updateMusicUI(){
         Music.toggleBtn.setAttribute(
             "aria-label",
             playing
-                ? "Pause music"
-                : "Play music"
+                ? "إيقاف الموسيقى"
+                : "تشغيل الموسيقى"
         );
 
 
@@ -1492,6 +1554,69 @@ function updateMusicUI(){
             playing
                 ? "playing"
                 : "paused";
+
+    }
+
+
+    const musicCard =
+        document.querySelector(
+            ".music-card"
+        );
+
+    if(
+        musicCard
+    ){
+
+        musicCard.classList.toggle(
+            "is-playing",
+            playing
+        );
+
+    }
+
+
+    const floatingMusic =
+        document.getElementById(
+            "floating-music-player"
+        ) ||
+        document.querySelector(
+            ".floating-music"
+        );
+
+    if(
+        floatingMusic
+    ){
+
+        floatingMusic.classList.toggle(
+            "is-playing",
+            playing
+        );
+
+    }
+
+
+    const floatingToggle =
+        document.getElementById(
+            "floating-music-toggle"
+        );
+
+    if(
+        floatingToggle
+    ){
+
+        floatingToggle.setAttribute(
+            "aria-pressed",
+            String(
+                playing
+            )
+        );
+
+        floatingToggle.setAttribute(
+            "aria-label",
+            playing
+                ? "إيقاف الموسيقى"
+                : "تشغيل الموسيقى"
+        );
 
     }
 
@@ -1655,7 +1780,17 @@ function bindControlEvents(){
         "click",
         () => {
 
-            playMusic();
+            if(
+                Music.pauseBtn
+            ){
+
+                playMusic();
+
+            }else{
+
+                toggleMusic();
+
+            }
 
         }
     );
@@ -1683,6 +1818,28 @@ function bindControlEvents(){
 
         }
     );
+
+
+    const floatingToggle =
+        document.getElementById(
+            "floating-music-toggle"
+        );
+
+    if(
+        floatingToggle
+    ){
+
+        addListener(
+            floatingToggle,
+            "click",
+            () => {
+
+                toggleMusic();
+
+            }
+        );
+
+    }
 
 
     addListener(
