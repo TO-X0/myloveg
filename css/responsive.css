@@ -1582,213 +1582,6 @@
 
 
 /* =========================================================
-   09. MOBILE REFINEMENTS FOR CURRENT STRUCTURE
-   <= 900px
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .site-header {
-        padding-inline: 0;
-    }
-
-    .site-header__inner {
-        width: min(
-            calc(100% - 18px),
-            100%
-        );
-
-        gap: 8px;
-    }
-
-    .desktop-nav {
-        display: none;
-    }
-
-    .header-music {
-        width: 42px;
-        height: 38px;
-        flex: 0 0 42px;
-        justify-content: center;
-        padding: 8px 10px;
-        gap: 6px;
-    }
-
-    .header-music__text {
-        display: none;
-    }
-
-    .mobile-menu-toggle {
-        display: block;
-    }
-
-    .hero {
-        padding-top: calc(110px + env(safe-area-inset-top));
-    }
-
-    .hero__content {
-        max-width: 100%;
-    }
-
-    .hero__title {
-        margin-top: 6px;
-    }
-
-    .hero__title-small {
-        margin-bottom: -8px;
-    }
-
-    .hero__title-main {
-        letter-spacing: -0.06em;
-    }
-
-    .hero__description {
-        max-width: 420px;
-    }
-
-    .hero__actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .button {
-        width: min(100%, 280px);
-        min-height: 48px;
-        padding-inline: 18px;
-    }
-
-    .button__arrow {
-        font-size: 15px;
-    }
-
-    .mobile-navigation__panel {
-        width: min(86vw, 380px);
-        padding-top: 22px;
-    }
-}
-
-
-@media (max-width: 640px) {
-
-    .site-header__inner {
-        width: min(
-            calc(100% - 12px),
-            100%
-        );
-    }
-
-    .brand {
-        gap: 8px;
-    }
-
-    .brand__symbol {
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
-    }
-
-    .brand__text strong {
-        font-size: 11px;
-    }
-
-    .brand__text small {
-        letter-spacing: 0.14em;
-    }
-
-    .header-music {
-        width: 42px;
-        min-width: 42px;
-        flex-basis: 42px;
-        padding: 8px;
-    }
-
-    .hero__title-small {
-        font-size: clamp(26px, 8vw, 44px);
-    }
-
-    .hero__title-main {
-        font-size: clamp(62px, 22vw, 104px);
-    }
-
-    .hero__description {
-        font-size: 0.92rem;
-        line-height: 1.9;
-    }
-}
-
-
-@media (max-width: 480px) {
-
-    .site-header {
-        height: 72px;
-    }
-
-    .site-header__inner {
-        width: min(
-            calc(100% - 12px),
-            100%
-        );
-    }
-
-    .header-music {
-        width: 38px;
-        min-width: 38px;
-        height: 38px;
-        flex-basis: 38px;
-    }
-
-    .hero {
-        min-height: 100svh;
-        padding-inline: 14px;
-        padding-bottom: 64px;
-    }
-
-    .hero__title {
-        gap: 0;
-    }
-
-    .hero__title-small {
-        margin-bottom: -4px;
-        font-size: clamp(24px, 7vw, 38px);
-    }
-
-    .hero__title-main {
-        font-size: clamp(58px, 18vw, 92px);
-    }
-
-    .hero__title-heart {
-        right: 7%;
-        bottom: 12%;
-        font-size: clamp(22px, 7vw, 42px);
-    }
-
-    .hero__description {
-        margin-top: 22px;
-        font-size: 0.86rem;
-        line-height: 1.9;
-    }
-
-    .hero__actions {
-        margin-top: 26px;
-    }
-
-    .button {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .mobile-navigation__links a {
-        gap: 12px;
-        padding: 15px 0;
-    }
-
-    .mobile-navigation__links a span {
-        font-size: 16px;
-    }
-}
-
-
-/* =========================================================
    09. LARGE iPHONE
    <= 414px
    ========================================================= */
@@ -2444,6 +2237,336 @@
 
 
 /* =========================================================
+   CURRENT DOM MOBILE OVERRIDES
+   Keep the current composition while sizing the live markup.
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .site-header__inner {
+        width: calc(100% - 32px);
+        min-width: 0;
+    }
+
+    .desktop-nav,
+    .header-music {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: grid;
+        flex: 0 0 44px;
+    }
+
+    .brand {
+        min-width: 0;
+    }
+
+    .brand__text {
+        min-width: 0;
+    }
+
+    .brand__text strong {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .memories .container,
+    .time .container,
+    .music-section .container,
+    .letter .container,
+    .question .container {
+        width: min(100% - 28px, var(--container-width));
+    }
+
+    .memory-feature {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .memory-feature__image {
+        min-height: clamp(280px, 78vw, 430px);
+    }
+
+    .memory-feature__caption {
+        padding-bottom: 4px;
+    }
+
+    .memory-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: minmax(180px, 55vw) minmax(150px, 42vw);
+        gap: 10px;
+    }
+
+    .love-counter {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 48px;
+        padding: 36px 16px;
+    }
+
+    .love-counter__main {
+        gap: 10px;
+    }
+
+    .love-counter__years {
+        font-size: clamp(58px, 18vw, 100px);
+    }
+
+    .love-counter__secondary {
+        gap: clamp(5px, 2vw, 14px);
+    }
+
+    .counter-unit {
+        min-width: 0;
+    }
+
+    .counter-unit strong {
+        min-width: 0;
+        font-size: clamp(20px, 7vw, 34px);
+    }
+
+    .love-counter__origin {
+        flex-wrap: wrap;
+        gap: 8px;
+        line-height: 1.5;
+    }
+
+    .time__stats {
+        margin-top: 28px;
+    }
+
+    .music-card {
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
+    }
+
+    .music-card__visual {
+        min-height: 230px;
+    }
+
+    .music-card__content {
+        min-width: 0;
+        padding: 34px 22px 30px;
+    }
+
+    .music-card__content h2 {
+        font-size: clamp(30px, 9vw, 46px);
+    }
+
+    .music-player {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 28px;
+    }
+
+    .love-letter {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 34px 22px;
+    }
+
+    .love-letter__top,
+    .love-letter__bottom {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .love-letter__body {
+        padding-block: 36px;
+    }
+
+    .love-letter__salutation {
+        font-size: clamp(24px, 7vw, 30px);
+    }
+
+    .love-letter__text p {
+        font-size: 14px;
+        line-height: 2.15;
+    }
+
+    .question__title {
+        font-size: clamp(48px, 15vw, 90px);
+    }
+
+    .question__actions {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    .question-button {
+        min-width: min(160px, 100%);
+        min-height: 52px;
+    }
+
+    .lightbox {
+        padding: max(10px, env(safe-area-inset-left))
+            max(10px, env(safe-area-inset-right));
+    }
+
+    .lightbox__container {
+        width: 100%;
+        height: 100svh;
+    }
+
+    .lightbox__stage {
+        min-width: 0;
+    }
+
+    .lightbox__image {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .lightbox__footer {
+        flex-wrap: wrap;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .floating-music {
+        right: max(10px, env(safe-area-inset-right));
+        bottom: calc(10px + env(safe-area-inset-bottom));
+        max-width: calc(100vw - 20px);
+        box-sizing: border-box;
+    }
+
+    .floating-music__info {
+        min-width: 0;
+    }
+
+    .cake-stage {
+        width: 100%;
+        max-width: 430px;
+        height: clamp(330px, 92vw, 380px);
+    }
+
+    .cake {
+        width: min(86vw, 360px);
+    }
+
+    .cake-glow {
+        width: min(600px, 140vw);
+    }
+}
+
+@media (max-width: 480px) {
+
+    .site-header__inner {
+        width: calc(100% - 24px);
+    }
+
+    .mobile-menu-toggle {
+        flex-basis: 42px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .brand__symbol {
+        width: 34px;
+        height: 34px;
+        font-size: 20px;
+    }
+
+    .brand__text strong {
+        font-size: 12px;
+    }
+
+    .memories .container,
+    .time .container,
+    .music-section .container,
+    .letter .container,
+    .question .container {
+        width: calc(100% - 20px);
+    }
+
+    .memory-grid {
+        grid-template-rows: minmax(160px, 54vw) minmax(135px, 40vw);
+        gap: 8px;
+    }
+
+    .love-counter {
+        padding-inline: 10px;
+    }
+
+    .love-counter__secondary {
+        gap: 4px;
+    }
+
+    .counter-separator {
+        font-size: 18px;
+    }
+
+    .time-stat {
+        padding-inline: 6px;
+    }
+
+    .time-stat strong {
+        font-size: 18px;
+    }
+
+    .music-card__visual {
+        min-height: 200px;
+    }
+
+    .music-card__content {
+        padding-inline: 16px;
+    }
+
+    .love-letter {
+        padding-inline: 16px;
+    }
+
+    .love-letter__body {
+        padding-block: 28px;
+    }
+
+    .question__actions {
+        flex-direction: column;
+    }
+
+    .question-button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .music-player__top {
+        gap: 10px;
+    }
+
+    .music-player__info {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .music-player__info strong,
+    .music-player__info span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .lightbox__footer {
+        gap: 10px;
+    }
+
+    .lightbox__caption {
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .lightbox__caption strong {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .cake-section {
+        padding-inline: 10px;
+    }
+}
+
+/* =========================================================
    END OF FILE
-   ❤️ إلى غدير ❤️
    ========================================================= */

@@ -1656,24 +1656,11 @@ function initializeWebsiteModules(){
     typeof window.initMusic === "function"
 ){
 
-    window.initMusic()
-        .then(() => {
+    window.initMusic().then(() => {
 
-            if(
-                typeof window.playMusic ===
-                "function"
-            ){
+        window.playMusic();
 
-                window.playMusic();
-
-            }
-
-        })
-        .catch(() => {
-
-            /* Music failure is reported by the music module. */
-
-        });
+    });
 
 }
     /*

@@ -95,8 +95,6 @@ const Music = {
 
     toggleBtn: null,
 
-    toggleButtons: [],
-
     volumeControl: null,
 
     muteButton: null,
@@ -122,12 +120,6 @@ const Music = {
     fading: false,
 
     fadeTimer: null,
-
-    fadeResolve: null,
-
-    commandId: 0,
-
-    sourceFailed: false,
 
     previousVolume: 0.4,
 
@@ -258,19 +250,6 @@ function getAudioSource(){
         existing
     ){
 
-        const source =
-            existing.querySelector(
-                "source[src]"
-            );
-
-        if (
-            source &&
-            source.src &&
-            existing.src !== source.src
-        ) {
-            existing.src = source.src;
-        }
-
         return existing;
 
     }
@@ -348,15 +327,6 @@ function collectControls(){
         get("music-toggle") ||
         query("[data-music-toggle]");
 
-    Music.toggleButtons = Array.from(
-        new Set(
-            [
-                Music.toggleBtn,
-                Music.playBtn,
-                get("floating-music-toggle")
-            ].filter(Boolean)
-        )
-    );
 
     Music.volumeControl =
         get("music-volume-range") ||
@@ -397,23 +367,6 @@ function collectControls(){
     Music.status =
         get("music-status") ||
         query("[data-music-status]");
-
-}
-
-function getMusicToggleButtons(){
-
-    return Array.from(
-        new Set(
-            [
-                Music.toggleBtn,
-                Music.playBtn,
-                get("floating-music-toggle"),
-                ...document.querySelectorAll(
-                    "[data-music-toggle]"
-                )
-            ].filter(Boolean)
-        )
-    );
 
 }
 
@@ -811,13 +764,6 @@ function fadeVolume(
         Music.fadeTimer =
             null;
 
-        Music.fading = false;
-
-        if (Music.fadeResolve) {
-            Music.fadeResolve();
-            Music.fadeResolve = null;
-        }
-
     }
 
 
@@ -865,8 +811,6 @@ function fadeVolume(
 
     return new Promise(
         resolve => {
-
-            Music.fadeResolve = resolve;
 
             Music.fadeTimer =
                 setInterval(
@@ -934,7 +878,6 @@ function fadeVolume(
                             Music.fading =
                                 false;
 
-                            Music.fadeResolve = null;
 
                             resolve();
 
@@ -956,56 +899,6 @@ function fadeVolume(
 PLAY
 =========================================================*/
 
-function waitForAudioReady(){
-
-    if(
-        !Music.audio ||
-        Music.audio.readyState >= 2
-    ){
-
-        return Promise.resolve(true);
-
-    }
-
-    const audio = Music.audio;
-
-    return new Promise(resolve => {
-
-        let settled = false;
-
-        const finish = value => {
-            if (settled) {
-                return;
-            }
-
-            settled = true;
-            audio.removeEventListener("canplay", onReady);
-            audio.removeEventListener("loadedmetadata", onReady);
-            audio.removeEventListener("error", onError);
-            window.clearTimeout(timeout);
-            resolve(value);
-        };
-
-        const onReady = () => finish(true);
-        const onError = () => finish(false);
-        const timeout = window.setTimeout(
-            () => finish(audio.readyState >= 1),
-            4000
-        );
-
-        audio.addEventListener("canplay", onReady, {once: true});
-        audio.addEventListener("loadedmetadata", onReady, {once: true});
-        audio.addEventListener("error", onError, {once: true});
-        // Do not restart a preload already in progress; on mobile this
-        // otherwise aborts the current request and creates a visible delay.
-        if (audio.networkState === 0) {
-            audio.load();
-        }
-
-    });
-
-}
-
 async function playMusic(){
 
     if(
@@ -1014,11 +907,6 @@ async function playMusic(){
 
         return false;
 
-    }
-
-    if (Music.sourceFailed) {
-        updateMusicUI();
-        return false;
     }
 
 
@@ -1041,25 +929,12 @@ async function playMusic(){
 
     }
 
+
     Music.userPaused =
         false;
 
-    const commandId =
-        ++Music.commandId;
-
 
     try{
-
-        const ready =
-            await waitForAudioReady();
-
-        if (
-            !ready ||
-            commandId !== Music.commandId
-        ) {
-            updateMusicUI();
-            return false;
-        }
 
         /*
          * Start silently when fade-in is enabled.
@@ -1092,10 +967,6 @@ async function playMusic(){
 
             await result;
 
-        }
-
-        if (commandId !== Music.commandId) {
-            return false;
         }
 
 
@@ -1137,15 +1008,10 @@ async function playMusic(){
         updateMusicUI();
 
 
-        if (
-            error &&
-            error.name !== "AbortError"
-        ) {
-            console.warn(
-                "Music playback was blocked or failed.",
-                error
-            );
-        }
+        console.warn(
+            "Music playback was blocked or failed.",
+            error
+        );
 
 
         return false;
@@ -1170,9 +1036,6 @@ async function pauseMusic(
         return;
 
     }
-
-    const commandId =
-        ++Music.commandId;
 
 
     if(
@@ -1213,10 +1076,6 @@ async function pauseMusic(
             MusicConfig.fadeSpeed
         );
 
-    }
-
-    if (commandId !== Music.commandId) {
-        return;
     }
 
 
@@ -1567,52 +1426,74 @@ function updateMusicUI(){
         playing;
 
 
-    getMusicToggleButtons().forEach(
-        button => {
-            button.classList.toggle(
-                "is-playing",
+    if(
+        Music.playBtn
+    ){
+
+        Music.playBtn.hidden =
+            playing;
+
+
+        Music.playBtn.setAttribute(
+            "aria-label",
+            "Play music"
+        );
+
+    }
+
+
+    if(
+        Music.pauseBtn
+    ){
+
+        Music.pauseBtn.hidden =
+            !playing;
+
+
+        Music.pauseBtn.setAttribute(
+            "aria-label",
+            "Pause music"
+        );
+
+    }
+
+
+    if(
+        Music.toggleBtn
+    ){
+
+        Music.toggleBtn.classList.toggle(
+            "is-playing",
+            playing
+        );
+
+
+        Music.toggleBtn.setAttribute(
+            "aria-pressed",
+            String(
                 playing
-            );
+            )
+        );
 
-            button.setAttribute(
-                "aria-pressed",
-                String(playing)
-            );
 
-            button.setAttribute(
-                "aria-label",
-                playing
-                    ? "Pause music"
-                    : "Play music"
-            );
+        Music.toggleBtn.setAttribute(
+            "aria-label",
+            playing
+                ? "Pause music"
+                : "Play music"
+        );
 
-            button.dataset.state =
-                playing
-                    ? "playing"
-                    : "paused";
 
-            const icon =
-                button.querySelector(
-                    ".music-player__play-icon"
-                );
+        /*
+         * Supports icon systems using CSS.
+         */
 
-            if (icon) {
-                icon.textContent =
-                    playing ? "Ⅱ" : "▶";
-            }
+        Music.toggleBtn.dataset.state =
+            playing
+                ? "playing"
+                : "paused";
 
-            if (
-                button.id === "floating-music-toggle"
-            ) {
-                button.setAttribute(
-                    "aria-label",
-                    playing
-                        ? "إيقاف الموسيقى"
-                        : "تشغيل الموسيقى"
-                );
-            }
-        }
-    );
+    }
 
 
     if(
@@ -1620,11 +1501,9 @@ function updateMusicUI(){
     ){
 
         Music.status.textContent =
-            Music.sourceFailed
-                ? "تعذر تشغيل الأغنية. يرجى استبدال ملف الصوت بصيغة MP3 أو M4A صالحة."
-                : playing
-                    ? "Playing"
-                    : "Paused";
+            playing
+                ? "Playing"
+                : "Paused";
 
     }
 
@@ -1748,17 +1627,11 @@ function bindAudioEvents(){
         "error",
         () => {
 
-            Music.sourceFailed = true;
             Music.playing =
                 false;
 
 
             updateMusicUI();
-
-            if (Music.status) {
-                Music.status.textContent =
-                    "تعذر تشغيل الأغنية. يرجى استبدال ملف الصوت بصيغة MP3 أو M4A صالحة.";
-            }
 
 
             console.warn(
@@ -1777,15 +1650,13 @@ CONTROL EVENTS
 
 function bindControlEvents(){
 
-    getMusicToggleButtons().forEach(
-        button => {
-            addListener(
-                button,
-                "click",
-                () => {
-                    toggleMusic();
-                }
-            );
+    addListener(
+        Music.playBtn,
+        "click",
+        () => {
+
+            playMusic();
+
         }
     );
 
@@ -2033,12 +1904,6 @@ function configureAudio(){
     Music.audio.preload =
         "auto";
 
-    // Start fetching the local track before the user reaches the player.
-    // Mobile browsers still require the eventual play() call to come from a gesture.
-    if (Music.audio.readyState === 0) {
-        Music.audio.load();
-    }
-
 
     Music.audio.volume =
         normalizeVolume(
@@ -2048,6 +1913,7 @@ function configureAudio(){
 
     Music.audio.controls =
         false;
+
 
     Music.audio.setAttribute(
         "aria-label",

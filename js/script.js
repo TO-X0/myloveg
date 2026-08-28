@@ -406,17 +406,11 @@ function initializeWebsite() {
 
     initializeStoryProgress();
 
-    if (typeof window.initGallery !== "function") {
-        initializeGallery();
-    }
+    initializeGallery();
 
-    if (typeof window.initGallery !== "function") {
-        initializeLightbox();
-    }
+    initializeLightbox();
 
-    if (typeof window.initMusic !== "function") {
-        initializeMusic();
-    }
+    initializeMusic();
 
     initializeAtmosphere();
 
@@ -1528,16 +1522,6 @@ function revealElement(element) {
 
 function initializeGallery() {
 
-    if (window.__legacyGalleryInitialized) {
-        return;
-    }
-
-    if (typeof window.initGallery === "function") {
-        return;
-    }
-
-    window.__legacyGalleryInitialized = true;
-
     const items =
         $$(
             ".gallery-item," +
@@ -2019,14 +2003,6 @@ function preloadGalleryNeighbours(index) {
 
 function initializeLightbox() {
 
-    if (window.__legacyGalleryInitialized) {
-        return;
-    }
-
-    if (typeof window.initGallery === "function") {
-        return;
-    }
-
     const {
         lightbox,
         lightboxClose,
@@ -2274,16 +2250,6 @@ function initializeGallerySwipe() {
    ========================================================= */
 
 function initializeMusic() {
-
-    if (window.__legacyMusicInitialized) {
-        return;
-    }
-
-    if (typeof window.initMusic === "function") {
-        return;
-    }
-
-    window.__legacyMusicInitialized = true;
 
     const {
         musicToggle,
